@@ -1,4 +1,4 @@
-package com.a5.cinemas;
+package com.a5cinemas.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

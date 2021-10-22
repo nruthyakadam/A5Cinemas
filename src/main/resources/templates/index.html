@@ -1,39 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+
+    <title>Registration</title>
 </head>
+
 <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+     <span class="sr-only">Toggle navigation</span> <span
+      class="icon-bar"></span> <span class="icon-bar"></span> <span
+      class="icon-bar"></span>
+    </button>
+                <a class="navbar-brand" href="#" th:href="@{/}">Registration and
+     Login Module</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<nav th:fragment="nav" class="topnav">
-    <a class="active" th:href="@{'/'}">Home</a>
-    <a th:href="@{'/movies/list'}">Movies</a>
+    <br>
+    <br>
+    <div class="container">
+        <h2>User Registration and Login Module using Spring Boot, Spring MVC, Spring Security, JPA/Hibernate and Thymeleaf</h2>
 
-    <div class="test">
-        <a sec:authorize="!isAuthenticated()" class="nav-item"><a class="btn btn-outline-light" th:href="@{/register}">Register</a></a>
-        <a sec:authorize="!isAuthenticated()" class="nav-item"><a class="btn btn-outline-light" th:href="@{/login}">Login</a></a>
-
-        <a sec:authorize="isAuthenticated()" class="nav-item dropdown">
-            <a class="nav-item" id="logoutNavbarDropdown" role="button"
-               aria-haspopup="true" aria-expanded="false" th:href="@{/logout}"> Logout
-            </a>
-        </a>
-
-        <a sec:authorize="isAuthenticated()" class="nav-item dropdown">
-            <a class="nav-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false" sec:authentication="name">
-            </a>
-        </a>
+        <p>
+            Welcome <span sec:authentication="principal.username">User</span>
+        </p>
     </div>
-</nav>
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 
 </body>
+
 </html>
