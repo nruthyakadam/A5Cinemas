@@ -18,6 +18,11 @@ public class User {
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
     
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
+     
+    private Boolean enabled = Boolean.FALSE;
+    
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
         name = "users_roles",
@@ -110,5 +115,21 @@ public class User {
 
 	public void setResetPasswordToken(String resetPasswordToken) {
 		this.resetPasswordToken = resetPasswordToken;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+	public Boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 }

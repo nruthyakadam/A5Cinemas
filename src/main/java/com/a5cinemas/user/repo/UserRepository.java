@@ -11,4 +11,5 @@ import com.a5cinemas.user.model.User;
 public interface UserRepository extends JpaRepository < User, Long > {
     User findByEmail(String email);
     public User findByResetPasswordToken(String token);
+    public User findByVerificationCode(String code);
 }

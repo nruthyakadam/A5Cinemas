@@ -1,8 +1,13 @@
 package com.a5cinemas.user.controller;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,7 +40,7 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto,
-        BindingResult result) {
+        BindingResult result, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
 
         User existing = userService.findByEmail(userDto.getEmail());
         if (existing != null) {
@@ -46,7 +51,21 @@ public class UserRegistrationController {
             return "registration";
         }
 
-        userService.save(userDto);
+        userService.save(userDto, getSiteURL(request));
         return "redirect:/registration?success";
+    }
+    
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
+    } 
+    
+    @GetMapping("/verify")
+    public String verifyUser(@Param("code") String code) {
+        if (userService.verify(code)) {
+            return "verify_success";
+        } else {
+            return "verify_fail";
+        }
     }
 }
