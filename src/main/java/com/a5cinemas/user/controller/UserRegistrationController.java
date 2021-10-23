@@ -60,12 +60,4 @@ public class UserRegistrationController {
         return siteURL.replace(request.getServletPath(), "");
     } 
     
-    @GetMapping("/verify")
-    public String verifyUser(@Param("code") String code) {
-        if (userService.verify(code)) {
-            return "verify_success";
-        } else {
-            return "verify_fail";
-        }
-    }
 }

@@ -115,4 +115,13 @@ public class ForgotPasswordController {
          
         return "reset_password_form";
     }
+    
+    @GetMapping("/verify")
+    public String verifyUser(@Param(value = "code") String code) {
+        if (userService.verify(code)) {
+            return "verify_success";
+        } else {
+            return "verify_fail";
+        }
+    }
 }
