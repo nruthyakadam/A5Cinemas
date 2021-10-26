@@ -53,7 +53,10 @@ public class UserServiceImpl implements UserService {
         user.setLastName(registration.getLastName());
         user.setEmail(registration.getEmail());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
-        user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        user.setAddress(registration.getAddress());
+        user.setCard(registration.getAddress());
+        user.setRecievePromotion(registration.getRecievePromotion());
+        user.setRoles(Arrays.asList(new Role("USER")));
         String randomCode = RandomString.make(64);
         user.setVerificationCode(randomCode);
         user.setEnabled(Boolean.FALSE);
@@ -68,7 +71,7 @@ public class UserServiceImpl implements UserService {
         user.setLastName(registration.getLastName());
         user.setEmail(registration.getEmail());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
-        user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        user.setRoles(Arrays.asList(new Role("USER")));
         //String randomCode = RandomString.make(64);
        // user.setVerificationCode(randomCode);
        // user.setEnabled(Boolean.FALSE);

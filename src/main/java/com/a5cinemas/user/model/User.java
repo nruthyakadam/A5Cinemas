@@ -28,8 +28,17 @@ public class User {
 
 	@Column(name = "verification_code", length = 64)
 	private String verificationCode;
+	
+	@Column(name = "address", length = 255)
+	private String address;
+	
+	@Column(name = "card", length = 16)
+	private String card;
 
 	private Boolean enabled = Boolean.FALSE;
+	
+	@Column(name = "recieve_promo")
+	private Boolean recievePromotion = Boolean.FALSE;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -130,4 +139,29 @@ public class User {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCard() {
+		return card;
+	}
+
+	public void setCard(String card) {
+		this.card = card;
+	}
+
+	public Boolean isRecievePromotion() {
+		return recievePromotion;
+	}
+
+	public void setRecievePromotion(Boolean recievePromotion) {
+		this.recievePromotion = recievePromotion;
+	}
+
 }

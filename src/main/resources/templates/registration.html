@@ -56,11 +56,6 @@
                         <p class="error-message" th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation error
                         </p>
                     </div>
-                    <div class="form-group" th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
-                        <label for="confirmEmail" class="control-label">Confirm
-       e-mail</label> <input id="confirmEmail" class="form-control" th:field="*{confirmEmail}" />
-                        <p class="error-message" th:each="error : ${#fields.errors('confirmEmail')}" th:text="${error}">Validation error</p>
-                    </div>
                     <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
                         <label for="password" class="control-label">Password</label> <input id="password" class="form-control" type="password" th:field="*{password}" />
                         <p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
@@ -70,10 +65,26 @@
        password</label> <input id="confirmPassword" class="form-control" type="password" th:field="*{confirmPassword}" />
                         <p class="error-message" th:each="error : ${#fields.errors('confirmPassword')}" th:text="${error}">Validation error</p>
                     </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('address')}? 'has-error':''">
+                        <label for="address" class="control-label">Billing Address</label> <input id="address" class="form-control" th:field="*{address}" />
+                        <p class="error-message" th:each="error: ${#fields.errors('address')}" th:text="${error}">Validation error</p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('card')}? 'has-error':''">
+                        <label for="address" class="control-label">Credit card number</label> <input id="card" class="form-control" th:field="*{card}"
+                        name="cardnumber" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="16" size="16" pattern="[0-9]+" required/>
+                        <p class="error-message" th:each="error: ${#fields.errors('card')}" th:text="${error}">Validation error</p>
+                    </div>
                     <div class="form-group" th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
                         <input id="terms" type="checkbox" th:field="*{terms}" /> <label class="control-label" for="terms"> I agree with the <a
        href="#">terms and conditions</a> for Registration.
       </label>
+                        <p class="error-message" th:each="error : ${#fields.errors('terms')}" th:text="${error}">Validation error
+                        </p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('recievePromotion')}? 'has-error':''">
+                        <input id="terms" type="checkbox" th:field="*{recievePromotion}" /> <label class="control-label" for="terms"> Subscribe to A5 promotional e-mails.
+                        <a href="#">Details</a>
+      				</label>
                         <p class="error-message" th:each="error : ${#fields.errors('terms')}" th:text="${error}">Validation error
                         </p>
                     </div>
