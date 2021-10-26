@@ -17,7 +17,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.a5cinemas.user.dto.UserProfileDto;
 import com.a5cinemas.user.dto.UserRegistrationDto;
 import com.a5cinemas.user.exception.CustomerNotFoundException;
 import com.a5cinemas.user.model.Role;
@@ -29,6 +31,7 @@ import net.bytebuddy.utility.RandomString;
 
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -57,6 +60,29 @@ public class UserServiceImpl implements UserService {
         User savedUser= userRepository.save(user);
         sendVerificationEmail(user, siteURL);
         return savedUser;
+    }
+    
+    public User save(UserProfileDto registration, String siteURL) throws UnsupportedEncodingException, MessagingException {
+        User user = new User();
+        user.setFirstName(registration.getFirstName());
+        user.setLastName(registration.getLastName());
+        user.setEmail(registration.getEmail());
+        user.setPassword(passwordEncoder.encode(registration.getPassword()));
+        user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        //String randomCode = RandomString.make(64);
+       // user.setVerificationCode(randomCode);
+       // user.setEnabled(Boolean.FALSE);
+        User savedUser= userRepository.save(user);
+       // sendVerificationEmail(user, siteURL);
+        return savedUser;
+    }
+    
+    public void save(User user) {
+    	userRepository.save(user);
+    }
+    
+    public User get(long id) {
+        return userRepository.findById(id).get();
     }
     
     private void sendVerificationEmail(User user, String siteURL)

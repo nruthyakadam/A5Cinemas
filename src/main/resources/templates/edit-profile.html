@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
+<meta charset="utf-8" />
     <title>Edit Profile</title>
-    <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <div id="title">
         <h1><a href="select-movie.html">A5 Cinemas</a></h1>
     </div>
@@ -15,28 +15,32 @@
 </head>
 
 <body id="editing-content" scroll="no" style="overflow: hidden">
-    <form>
+    <form action="#" th:action="@{/account/update}" enctype="multipart/form-data" th:object="${user}"
+            method="post">
+            
+    <!--     <div th:if="{$message != null}" class="alert alert-success text-center">
+        	[[${message}]]
+        </div> -->
         <div id="edit-form">
             <h1>Edit Profile</h1>
 
-            <label for="email">Edit email:</label> <br>
-            <input type="email" placeholder="example@a5cinemas.com" required> <br><br>
+            <label for="email">Email:</label> <br>
+            <input type="email" placeholder="example@a5cinemas.com" th:field="*{email}" readonly="readonly"> <br><br>
 
-            <label for="address">Edit address:</label> <br>
-            <input type="text" placeholder="1000 Lakeside Dr. Athens, GA" required> <br><br>
+            <label for="first-name">First Name:</label> <br>
+            <input type="text" placeholder="First name" th:field="*{firstName}" required> <br><br>
 
-            <label for="payment-info">Name on Card:</label> <br>
-            <input type="text" placeholder="John Doe"> <br><br>
+            <label for="last-name">Last Name:</label> <br>
+            <input type="text" placeholder="Last name" th:field="*{lastName}"> <br><br>
 
-            <label for="payment-info">Card Number:</label> <br>
-            <input type="text" placeholder="1234-5678-9101-1121"> <br><br>
-
-            <label for="payment-info">Expiration Date:</label> <br>
-            <input type="text" placeholder="01/21"> <br><br>
-
-            <label for="payment-info">CVV:</label> <br>
-            <input type="text" placeholder="123"> <br><br>
-
+            <label for="password">Password:</label> <br>
+            <input type="text" th:field="*{password}"> <br><br>
+            <!-- 
+            <label for="password">Confirm Password:</label> <br>
+            <input type="text" th:field="*{confirmPassword}"> <br><br> -->
+            
+            
+            
             <label class="container">Receive promotional emails
                 <input type="checkbox">
                 <span class="checkmark"></span>
