@@ -70,4 +70,12 @@ public class CinemaUserDetails implements UserDetails {
 	public void setLastName(String lastName) {
 		this.user.setLastName(lastName);
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

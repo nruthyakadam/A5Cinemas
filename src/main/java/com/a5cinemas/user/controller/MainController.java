@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5cinemas.user.dto.UserProfileDto;
-import com.a5cinemas.user.dto.UserRegistrationDto;
+import com.a5cinemas.user.exception.CustomerNotFoundException;
 import com.a5cinemas.user.model.CinemaUserDetails;
 import com.a5cinemas.user.model.User;
 import com.a5cinemas.user.service.UserService;
@@ -34,6 +33,16 @@ public class MainController {
     @GetMapping("/")
     public String root() {
         return "index";
+    }
+
+    @GetMapping("/manage-promotions")
+    public String manageMovies() {
+        return "manage-promotions";
+    }
+    
+    @GetMapping("/select-time")
+    public String selectTime() {
+        return "select-time";
     }
 
     @GetMapping("/login")
@@ -55,13 +64,13 @@ public class MainController {
         return mav;
     }
     
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveProduct(@ModelAttribute("user")  @Valid User userDto) {
-    	userDto.setId(26L);
-    	userService.save(userDto);
-         
-        return "redirect:/";
-    }
+//    @RequestMapping(value = "/save", method = RequestMethod.POST)
+//    public String saveProduct(@ModelAttribute("user")  @Valid User userDto) {
+//    	userDto.setId(26L);
+//    	userService.save(userDto);
+//         
+//        return "redirect:/";
+//    }
 
     
     
@@ -70,24 +79,27 @@ public class MainController {
             @AuthenticationPrincipal CinemaUserDetails userDetails,
             Model model, HttpServletRequest request) {
         String userEmail = request.getUserPrincipal().getName();
-        User user = userService.findByEmail(userEmail);
+        CinemaUserDetails user = userService.findByEmail(userEmail);
          
-        model.addAttribute("user", user);
+        model.addAttribute("user", user.getUser());
         model.addAttribute("pageTitle", "Account Details");
          
         return "edit-profile";
     }
     
     @PostMapping("/account/update")
-    public String saveDetails(@ModelAttribute("user") @Valid UserProfileDto userDto, RedirectAttributes redirectAttributes,
-    		@AuthenticationPrincipal CinemaUserDetails loggedUser, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
-    	User user = userService.findByEmail(request.getUserPrincipal().getName());
-    	user.setFirstName(userDto.getFirstName());
-    	user.setLastName(userDto.getLastName());
-    	userService.save(user);
-    	//loggedUser.setLastName(user.getFirstName());
-    	//loggedUser.setLastName(user.getLastName());
-    	redirectAttributes.addFlashAttribute("message", "Your profile has been updated.");
-    	return "redirect:/account";
+    public String saveDetails(@ModelAttribute("user") @Valid UserProfileDto userDto, RedirectAttributes redirectAttributes, Model model) {
+    	try {
+    		User savedUser = userService.save(userDto);
+    		model.addAttribute("user", savedUser);
+		} catch (CustomerNotFoundException ex) {
+            model.addAttribute("error", ex.getMessage());
+            return  "redirect:/account?failure";
+        } catch (UnsupportedEncodingException | MessagingException e) {
+            model.addAttribute("error", "Error while sending email");
+        }
+    	 
+    	//redirectAttributes.addFlashAttribute("message", "Your profile has been updated.");
+    	return  "redirect:/account?success";
     }
 }

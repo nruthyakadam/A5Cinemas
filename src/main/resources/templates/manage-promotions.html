@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  background: #F44336;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+a { text-decoration: none; color: white}
+</style>
+</head>
+<body>
+
+<head>
+    <title>Select Movie</title>
+    <link rel="stylesheet" href="home-style.css">
+    <div id="title">
+        <h1>A5 Cinemas</h1>
+    </div>
+    <div id="top-bar">
+        <a sec:authorize="isAuthenticated()" th:href="@{/}">Home</a>
+    	<a sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
+    	<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    </div>
+</head>
+
+<table>
+  <tr class="category">
+    <th>Promotion Details</th>
+    <th>Expiry Date</th>
+    <th>Add/Delete</th>
+    <th>Promo Code</th>
+  </tr>
+  <tr>
+    <td>$1.50 Off Small Popcorn</td>
+    <td>
+        <input type="date" data-date-inline-picker="true" />
+    </td>
+    <td>
+        <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
+            Add Promotion
+            </button>
+    
+            <button  onclick="alert('Admin is able to delete promotions from user screen')" class="delete">
+                Delete Promotion
+            </button>
+    </td>
+    <td>KSF40L</td>
+  </tr>
+  <tr>
+    <td>Buy 2 Small Popcorn & Get 1 Free Small Drink</td>
+    <td>
+        <input type="date" data-date-inline-picker="true" />
+    </td>
+    <td>
+        <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
+            Add Promotion
+            </button>
+    
+            <button  onclick="alert('Admin is able to delete promotions from user screen')" class="delete">
+                Delete Promotion
+            </button>
+    </td>
+    <td>OMG35P</td>
+  </tr>
+  <tr>
+    <td>$1.25 Off Small Fountain Drink</td>
+    <td>
+        <input type="date" data-date-inline-picker="true" />
+    </td>
+    <td>
+        <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
+            Add Promotion
+            </button>
+    
+            <button  onclick="alert('Admin is able to delete promotions from user screen')" class="delete">
+                Delete Promotion
+            </button>
+    </td>
+    <td>NSR18C</td>
+  </tr>
+  <tr>
+    <td>Buy 1 Large Fountain Drink & Get 1 Small Popcorn Free</td>
+    <td>
+        <input type="date" data-date-inline-picker="true" />
+    </td>
+    <td>
+        <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
+            Add Promotion
+            </button>
+    
+            <button  onclick="alert('Admin is able to delete promotions from user screen')" class="delete">
+                Delete Promotion
+            </button>
+    </td>
+    <td>UTB98T</td>
+  </tr>
+  <tr>
+    <td>Buy 2 Movie Tickets & Get 1 Ticket for 1/2 Price</td>
+    <td>
+        <input type="date" data-date-inline-picker="true" />
+    </td>
+    <td>
+        <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
+            Add Promotion
+            </button>
+    
+            <button  onclick="alert('Admin is able to delete promotions from user screen')" class="delete">
+                Delete Promotion
+            </button>
+    </td>
+    <td>KQI03B</td>
+  </tr>
+  <tr>
+    <td>Buy 3 Medium Fountain Drinks & Get 1 Free Small Pack of Candy</td>
+    <td>
+        <input type="date" data-date-inline-picker="true" />
+    </td>
+    <td>
+        <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
+        Add Promotion
+        </button>
+
+        <button  onclick="alert('Admin is able to delete promotions from user screen')" class="delete">
+            Delete Promotion
+        </button>
+    </td>
+    <td>HWY74Y</td>
+  </tr>
+  <tr>
+    <td>$1.75 Off Small Popcorn</td>
+    <td>
+        <input type="date" data-date-inline-picker="true" />
+    </td>
+    <td>
+        <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
+            Add Promotion
+            </button>
+    
+            <button  onclick="alert('Admin is able to delete promotions from user screen')" class="delete">
+                Delete Promotion
+            </button>
+    </td>
+    <td>SHE26Y</td>
+  </tr>
+</table>
+</body>
+<footer>
+  <span>1000 Lakeside Dr. Athens, GA</span>
+  <span>706-XXX-XXXX</span>
+</footer>
+</html>
+
+<style>
+  h1 {
+    width: 100%;
+    background-color: #F44336;
+    top: 0;
+    left: 0;
+    margin-left: -10px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    font-size: 50px;
+    color: white;
+}
+
+#top-bar {
+    color: white;
+    font-size: 20px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-top: 40px;
+    margin-right: 40px;
+}
+#top-bar a {
+    margin-left: 20px;
+}
+
+#top-bar a:hover {
+    cursor: pointer;
+    text-shadow: 3px 3px black;
+}
+
+body {
+    margin: 0;
+    text-align: left;
+    user-select: none;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+  .header {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:50px;
+    padding-top:50px;
+    padding-bottom: 50px;
+    text-align: center;
+    background: #6ba8f7;
+    color:#c8e6ee;
+  }
+
+  .category{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #c8e6ee;
+  }
+
+  footer {
+    background-color: #F44336;
+    color: white;
+    width: 110%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    text-align: left;
+}
+
+footer span {
+    margin-right: 30px;
+}
+
+
+</style>

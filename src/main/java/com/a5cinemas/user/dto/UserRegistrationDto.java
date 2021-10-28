@@ -6,8 +6,8 @@ import javax.validation.constraints.NotEmpty;
 
 import com.a5cinemas.user.validator.*;
 
-@FieldMatch.List({
-		@FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match") })
+//@FieldMatch.List({
+//		@FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match") })
 public class UserRegistrationDto {
 
 	@NotEmpty
@@ -19,7 +19,7 @@ public class UserRegistrationDto {
 	@NotEmpty
 	private String password;
 
-	@NotEmpty
+
 	private String confirmPassword;
 
 	@Email

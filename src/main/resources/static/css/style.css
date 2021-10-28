@@ -4,7 +4,13 @@ body {
     user-select: none;
     font-family:Arial, Helvetica, sans-serif;
 }
-
+body::-webkit-scrollbar {
+    width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 10px;
+}
 #title {
     width: 100%;
     background-color: #F44336;
@@ -20,6 +26,11 @@ body {
     padding-left: 30px;
 }
 
+#title a {
+    text-decoration: none;
+    color: white;
+}
+
 #top-bar {
     color: white;
     font-size: 20px;
@@ -28,6 +39,10 @@ body {
     right: 0;
     margin-top: 40px;
     margin-right: 40px;
+}
+
+.form-group {
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 .steps {
@@ -62,10 +77,10 @@ body {
     text-shadow: 3px 3px black;
 }
 
-.column {
+.col-md-6, .column {
     float: left;
     width: 50%;
-    top: 0;
+    top: 0px;
 }
 
 #screen {
@@ -83,13 +98,13 @@ body {
 
 #left-column {
     height: 100%;
-    margin-top: 275px;
+    margin-top: 100px;
 }
 
 #right-column, #editing-content {
     background-image: linear-gradient(
         rgba(244,67,54,0.3),
-        rgba(244,67,54,0.4)
+        rgba(0,0,0,2)
     ),
     url(https://images.unsplash.com/photo-1620177088260-a9150572baf4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1752&q=80);
     background-size: cover;
@@ -99,7 +114,7 @@ body {
 }
 
 #right-column-content {
-    margin-top: 40%;
+    margin-top: 20%;
     margin-bottom: 40%;
 }
 
@@ -140,6 +155,11 @@ input[type=email], input[type=password], input[type="text"] {
     width: 50%;
     border-color: lightgray;
     text-align: center;
+}
+
+#username, #password {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 table input[type=checkbox] {
@@ -187,14 +207,19 @@ table input[type=checkbox] {
     bottom: 0;
 }
 
+form {
+    margin-bottom: 0px;
+    padding-bottom: 0;
+}
+
 table {
     text-align: center;
     margin-left: 100px;
     margin-top: -30px;
 }
 
-#PasswordInput  {
-    margin-left: -20px;
+#password  {
+    margin-left: 0px;
 }
 
 form i {
@@ -211,7 +236,7 @@ form i {
     text-decoration: underline;
 }
 
-button {
+button, #login-submit {
     cursor: pointer;
     background-color: #F44336;
     color: white;
@@ -224,7 +249,7 @@ button {
     width: 30%;
 }
 
-button:hover {
+button:hover, #login-submit:hover {
     background-color: #D63B2F;
     box-shadow: 3px 2px black;
 }
@@ -257,4 +282,14 @@ footer {
 
 footer span {
     margin-right: 30px;
+}
+
+#register {
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.alert {
+    margin-bottom: 15px;
 }

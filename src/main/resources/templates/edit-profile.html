@@ -5,16 +5,24 @@
     <title>Edit Profile</title>
      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <div id="title">
-        <h1><a href="select-movie.html">A5 Cinemas</a></h1>
+        <h1>A5 Cinemas</a></h1>
     </div>
+    <style>
+    a { text-decoration: none; color: white}
+    p { text-decoration: none; color: red}
+    .whiteclass{
+    color:white;
+    }
+  	</style>
     <div id="top-bar">
-        <a href="select-movie.html">Movies</a>
-        <a>Offers</a>
-        <a href="login-page.html">Login</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
+    	<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
     </div>
 </head>
 
-<body id="editing-content" scroll="no" style="overflow: hidden">
+<body id="editing-content" >
     <form action="#" th:action="@{/account/update}" enctype="multipart/form-data" th:object="${user}"
             method="post">
             
@@ -22,7 +30,20 @@
         	[[${message}]]
         </div> -->
         <div id="edit-form">
-            <h1>Edit Profile</h1>
+        <br><br><br>
+          <div th:if="${param.success}">
+                    <div class="alert alert-info">Successfully changed your profile information.</div>
+                </div>
+           
+           <div th:if="${param.failure}">
+                    <div class="alert alert-info"><p class="text-warning">The old password is incorrect</p></div>
+                </div>
+
+			<div th:if="${message != null}">
+				<p class="text-warning">[[${message}]]</p>
+			</div>
+
+			<h1>Edit Profile</h1>
 
             <label for="email">Email:</label> <br>
             <input type="email" placeholder="example@a5cinemas.com" th:field="*{email}" readonly="readonly"> <br><br>
@@ -33,19 +54,31 @@
             <label for="last-name">Last Name:</label> <br>
             <input type="text" placeholder="Last name" th:field="*{lastName}"> <br><br>
 
-            <label for="password">Password:</label> <br>
-            <input type="text" th:field="*{password}"> <br><br>
-            <!-- 
-            <label for="password">Confirm Password:</label> <br>
-            <input type="text" th:field="*{confirmPassword}"> <br><br> -->
+            <label for="new-password" >New Password:</label> <br>
+            <input type="password" th:field="*{password}" placeholder="Enter new password"> <br><br>
             
+            <label for="old-password">Old Password:</label> <br>
+            <input type="password" th:field="*{oldPassword}" placeholder="Enter old password"> <br><br>
             
+            <!-- <label for="old-password">Old Password:</label> <br>
+            <input type="password" th:field="*{oldPassword}"> <br><br> -->
             
+            <label for="address">Billing Address:</label> <br>
+            <input type="text" th:field="*{address}"> <br><br>
+            
+            <label for="card">Card number:</label> <br>
+            <input type="password" th:field="*{card}" name="cardnumber" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="16" size="16" pattern="[0-9]+"> <br><br>
+     <!--        
             <label class="container">Receive promotional emails
-                <input type="checkbox">
+                <input id="terms" type="checkbox" th:field="*{recievePromotion}" /> Subscribe to A5 promotional e-mails.
+                <span class="checkmark"></span>
+            </label> <br> -->
+            
+            <label class="container">
+                <input id="recievePromotion" type="checkbox" th:field="*{recievePromotion}" /> Subscribe to A5 promotional e-mails.
                 <span class="checkmark"></span>
             </label> <br>
-
+            
             <button type="submit">Apply changes</button>
         </div>
     </form>

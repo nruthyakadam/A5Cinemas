@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <title>Select Time</title>
-    <link rel="stylesheet" href="home-style.css">
+    <link rel="stylesheet"th:href="@{/css/home-style.css}">
     <div id="title">
-        <h1><a href="select-movie.html">A5 Cinemas</a></h1>
+        <h1>A5 Cinemas</a></h1>
     </div>
+    <style>
+    a { text-decoration: none; color: white}
+  	</style>
     <div id="top-bar">
-        <a href="select-movie.html">Movies</a>
-        <a>Offers</a>
-        <a href="login-page.html">Login</a>
+    	<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+    	<a sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
+    	<a sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
+    	<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
     </div>
 </head>
 

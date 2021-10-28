@@ -6,13 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
-
-    <title>Registration</title>
+<!--     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+ -->
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+<div id="title">
+        <h1>A5 Cinemas</a></h1>
+    </div>
+    <style>
+    a { text-decoration: none;}
+    p {color:red;}
+    .whiteclass{
+    color:white;
+    }
+  	</style>
+    <div id="top-bar">
+        <a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+        <a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
+    	<a class="whiteclass" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    </div>
 </head>
 
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+<body id="editing-content" >
+<!--     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -24,82 +40,96 @@
      Login Module</a>
             </div>
         </div>
-    </nav>
+    </nav> -->
 
-    <br>
-    <br>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-
+<form action="#" th:action="@{/registration}" th:object="${user}" enctype="multipart/form-data" method="post" >
+    <div id="edit-form"  >
+        <br><br><br>
                 <div th:if="${param.success}">
                     <div class="alert alert-info">Successfully registered. Please check your mail for verification link!</div>
                 </div>
 
                 <h1>Registration</h1>
-                <form th:action="@{/registration}" th:object="${user}" method="post">
+                
 
-                    <p class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation error
+                  <!--   <p class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation error
                     </p>
 
                     <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
                         <label for="firstName" class="control-label">First name</label> <input id="firstName" class="form-control" th:field="*{firstName}" />
                         <p class="error-message" th:each="error: ${#fields.errors('firstName')}" th:text="${error}">Validation error</p>
-                    </div>
+                    </div> -->
+                    <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''" >
+                        <label for="firstName" class="control-label">*First Name</label><br> <input id="firstName" class="form-control" type="text" th:field="*{firstName}" />
+                        <p class="invalid" th:each="error : ${#fields.errors('firstName')}" th:text="${error}">Validation error</p>
+                    </div><br>
                     <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
-                        <label for="lastName" class="control-label">Last name</label> <input id="lastName" class="form-control" th:field="*{lastName}" />
+                        <label for="lastName" class="control-label">*Last name</label><br> <input id="lastName" class="form-control" type="text" th:field="*{lastName}" />
                         <p class="error-message" th:each="error : ${#fields.errors('lastName')}" th:text="${error}">Validation error</p>
-                    </div>
+                    </div><br>
                     <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
-                        <label for="email" class="control-label">E-mail</label> <input id="email" class="form-control" th:field="*{email}" />
+                        <label for="email" class="control-label">*E-mail</label> <br><input id="email" class="form-control" type="email" th:field="*{email}" />
                         <p class="error-message" th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation error
                         </p>
-                    </div>
+                    </div><br>
+                    
                     <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
-                        <label for="password" class="control-label">Password</label> <input id="password" class="form-control" type="password" th:field="*{password}" />
-                        <p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
-                    </div>
-                    <div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
-                        <label for="confirmPassword" class="control-label">Confirm
-       password</label> <input id="confirmPassword" class="form-control" type="password" th:field="*{confirmPassword}" />
+<!--                         <label for="password" class="control-label">*Password</label><br> <input  id="password" class="form-control" type="password" th:field="*{password}" /><br>
+ -->                      <label for="password">*Password</label>:<br> <input type="password"
+							id="password" name="password" class="form-control"
+							placeholder="Password" /><br>
+						<input type="checkbox" onclick="myFunction()">Show
+						Password <i class="bi bi-eye-slash" id="togglePassword"></i> <br>
+						<script>
+							function myFunction() {
+								var x = document.getElementById("password");
+								if (x.type === "password") {
+									x.type = "text";
+								} else {
+									x.type = "password";
+								}
+							}
+						</script>  
+ 						  <p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
+                    </div><br>
+                    <!-- <div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
+                        <label for="confirmPassword" class="control-label">*Confirm
+       password</label><br> <input  id="confirmPassword" class="form-control" type="password" th:field="*{confirmPassword}" /><br>
                         <p class="error-message" th:each="error : ${#fields.errors('confirmPassword')}" th:text="${error}">Validation error</p>
-                    </div>
+                    </div><br> -->
                     <div class="form-group" th:classappend="${#fields.hasErrors('address')}? 'has-error':''">
-                        <label for="address" class="control-label">Billing Address</label> <input id="address" class="form-control" th:field="*{address}" />
+                        <label for="address" class="control-label">Billing Address</label><br> <input id="address" class="form-control" type="text" th:field="*{address}" /><br>
                         <p class="error-message" th:each="error: ${#fields.errors('address')}" th:text="${error}">Validation error</p>
-                    </div>
+                    </div><br>
                     <div class="form-group" th:classappend="${#fields.hasErrors('card')}? 'has-error':''">
-                        <label for="address" class="control-label">Credit card number</label> <input id="card" class="form-control" th:field="*{card}"
-                        name="cardnumber" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="16" size="16" pattern="[0-9]+" required/>
+                        <label for="address" class="control-label">Credit card number</label><br> <input id="card" class="form-control" type="text"  th:field="*{card}"
+                        name="cardnumber" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="16" size="16" pattern="[0-9]+"/><br>
                         <p class="error-message" th:each="error: ${#fields.errors('card')}" th:text="${error}">Validation error</p>
-                    </div>
+                    </div><br>
                     <div class="form-group" th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
-                        <input id="terms" type="checkbox" th:field="*{terms}" /> <label class="control-label" for="terms"> I agree with the <a
+                        <input id="terms" type="checkbox" th:field="*{terms}" required /> <label class="control-label" for="terms">* I agree with the <a
        href="#">terms and conditions</a> for Registration.
       </label>
-                        <p class="error-message" th:each="error : ${#fields.errors('terms')}" th:text="${error}">Validation error
-                        </p>
-                    </div>
+                    </div><br>
                     <div class="form-group" th:classappend="${#fields.hasErrors('recievePromotion')}? 'has-error':''">
                         <input id="terms" type="checkbox" th:field="*{recievePromotion}" /> <label class="control-label" for="terms"> Subscribe to A5 promotional e-mails.
                         <a href="#">Details</a>
       				</label>
-                        <p class="error-message" th:each="error : ${#fields.errors('terms')}" th:text="${error}">Validation error
-                        </p>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success">Register</button>
+                        <button type="submit" class="btn btn-success">Register</button><br>
                         <span>Already registered? <a href="/" th:href="@{/login}">Login
         here</a></span>
                     </div>
 
-                </form>
+                
             </div>
-        </div>
-    </div>
-
+</form>
     <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <footer>
+        <span>1000 Lakeside Dr. Athens, GA</span>
+        <span>706-XXX-XXXX</span>
+    </footer>
 </body>
 </html>

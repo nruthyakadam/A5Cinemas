@@ -50,12 +50,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/edit/{id}",
                 "/account**",
                 "/save**").permitAll()
-            //.antMatchers("/edit**").hasAnyAuthority("USER")
-            .anyRequest().authenticated()
+            .antMatchers("/manage-promotions").hasAnyAuthority("ADMIN")
+            .antMatchers("/select-time").hasAnyAuthority("USER","ADMIN")
             .and()
             .formLogin()
             .loginPage("/login")
             .permitAll()
+            .and()
+            .rememberMe().tokenValiditySeconds(7 * 24 * 60 * 60)
+            .key("AbcdefghiJklmNoPqRstUvXyz")
             .and()
             .logout()
             .invalidateHttpSession(true)

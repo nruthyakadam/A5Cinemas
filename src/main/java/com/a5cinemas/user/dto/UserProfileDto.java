@@ -13,17 +13,20 @@ public class UserProfileDto {
     @NotEmpty
     private String lastName;
 
-    @NotEmpty
     private String password;
 
-    
+    private String oldPassword;
     @Email
     @NotEmpty
     private String email;
-
     
-    @AssertTrue
-    private Boolean terms;
+    
+    private Boolean recievePromotion = Boolean.FALSE;
+	
+	private String address;
+	
+	private String card;
+
 
     public String getFirstName() {
         return firstName;
@@ -58,11 +61,35 @@ public class UserProfileDto {
         this.email = email;
     }
 
-    public Boolean getTerms() {
-        return terms;
-    }
+    public Boolean isRecievePromotion() {
+		return recievePromotion;
+	}
 
-    public void setTerms(Boolean terms) {
-        this.terms = terms;
-    }
+	public void setRecievePromotion(Boolean recievePromotion) {
+		this.recievePromotion = recievePromotion;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCard() {
+		return card;
+	}
+
+	public void setCard(String card) {
+		this.card = card;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
 }

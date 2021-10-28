@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Verification</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+    
+
+    <title>Registration</title>
+	<div id="title">	
+        <h1>A5 Cinemas</h1>
+    </div>
 </head>
-<body>
+<body id="editing-content">
 <div class="container text-center">
-    <h3>Congratulations, your account has been verified.</h3>
-    <h4><a th:href="@{/login}">Click here to Login</a></h4>
+<br><br><br><br><br><br>
+    <h3 style="color:white;" >Congratulations, your account has been verified.</h3>
+    <h4><a style="color:white;" th:href="@{/login}">Click here to Login</a></h4>
 </div>
+<footer>
+        <span>1000 Lakeside Dr. Athens, GA</span>
+        <span>706-XXX-XXXX</span>
+    </footer>
 </body>
 </html>

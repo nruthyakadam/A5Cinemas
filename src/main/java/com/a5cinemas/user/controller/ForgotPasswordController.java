@@ -45,7 +45,7 @@ public class ForgotPasswordController {
         	userService.updateResetPasswordToken(token, email);
             String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
             sendEmail(email, resetPasswordLink);
-            model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
+            model.addAttribute("message", "We have sent a reset password link to your email.");
              
         } catch (CustomerNotFoundException ex) {
             model.addAttribute("error", ex.getMessage());
@@ -73,8 +73,8 @@ public class ForgotPasswordController {
                 + "<br>"
                 + "<p>Ignore this email if you have not made the request.</p>"
                 + "Thanks and Regards,<br>"
-                + "A5 Cimeas"
-                + "Ph: (706)-714-XXXX"
+                + "A5 Cimeas<br>"
+                + "Ph: (706)-714-XXXX<br>"
                 + "Add.: Lakeside Dr, Athens-30605";;
          
         helper.setSubject(subject);
@@ -105,7 +105,7 @@ public class ForgotPasswordController {
         model.addAttribute("title", "Reset your password");
          
         if (user == null) {
-            model.addAttribute("message", "Invalid Token");
+            model.addAttribute("message", "Invalid reset password link.");
             
         } else {           
         	userService.updatePassword(user, password);

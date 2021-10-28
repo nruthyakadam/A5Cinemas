@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.a5cinemas.user.dto.UserRegistrationDto;
+import com.a5cinemas.user.model.CinemaUserDetails;
 import com.a5cinemas.user.model.User;
 import com.a5cinemas.user.service.UserService;
 
@@ -42,8 +43,8 @@ public class UserRegistrationController {
     public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto,
         BindingResult result, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
 
-        User existing = userService.findByEmail(userDto.getEmail());
-        if (existing != null) {
+        CinemaUserDetails existing = userService.findByEmail(userDto.getEmail());
+        if (existing.getUser() != null) {
             result.rejectValue("email", null, "There is already an account registered with that email");
         }
 

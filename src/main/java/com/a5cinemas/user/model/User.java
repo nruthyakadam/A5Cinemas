@@ -23,6 +23,8 @@ public class User {
 	@Column(length = 255, nullable = false)
 	private String password;
 	
+	private String oldPassword;
+	
 	@Column(name = "reset_password_token", length = 30)
 	private String resetPasswordToken;
 
@@ -162,6 +164,18 @@ public class User {
 
 	public void setRecievePromotion(Boolean recievePromotion) {
 		this.recievePromotion = recievePromotion;
+	}
+
+	public Boolean getRecievePromotion() {
+		return recievePromotion;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
 	}
 
 }
