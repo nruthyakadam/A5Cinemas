@@ -52,14 +52,14 @@
 <div class="adminfunc">
 <br>
 <h2>Manage Movie Schedules:</h2><br>
-<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{11/schedule}">Add Movie Schedule</a>
-<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{11/schedule}">Edit Movie Schedule</a>
+<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/schedule}">Add Movie Schedule</a>
+<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/schedule}">Edit Movie Schedule</a>
 </div>
 <div class="adminfunc">
 <br>
 <h2>Manage Promotions:</h2><br>
 <a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/add_promo}">Add New Promotion</a>
-<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/add_promo}">Edit Promotions</a>
+<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/edit_promo}">Edit Promotions</a>
 
 </div>
 </body>

@@ -1,31 +1,27 @@
 package com.a5cinemas.user.dto;
 
-
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class ScheduleDto {
 
-	private LocalDateTime date;
-    
-    private LocalDateTime time;
-    
+	private String scheduleDate;
 
-	public LocalDateTime getDate() {
-		return date;
+	private Date scheduleTime;
+
+	public String getScheduleDate() {
+		return scheduleDate;
 	}
 
-	public void setDate(LocalDateTime date) {
-		this.date = date;
+	public void setScheduleDate(String scheduleDate) {
+		this.scheduleDate = scheduleDate;
 	}
 
-	public LocalDateTime getTime() {
-		return time;
+	public Date getScheduleTime() {
+		return scheduleTime;
 	}
 
-	public void setTime(LocalDateTime time) {
-		this.time = time;
+	public void setScheduleTime(Date scheduleTime) {
+		this.scheduleTime = scheduleTime;
 	}
-
-
 
 }

@@ -14,7 +14,7 @@ public class Schedule {
     @Column(name = "id")
     private Long id;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss a")
     private LocalDateTime date;
     
     @DateTimeFormat(pattern = "HH:mm a")

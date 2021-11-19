@@ -14,7 +14,7 @@
     }
   	</style>
     <div id="top-bar">
-    	<a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+    	<a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage_movies}">Admin Page</a>
     	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
     	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
     	<a class="whiteclass" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>

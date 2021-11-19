@@ -14,13 +14,22 @@ public class Promotion {
     @Column(name = "id")
     private Long id;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime expiration;
 
     @Column(name = "code", length = 255, nullable = false)
 	private String code;
     
-    @Column(name = "sent_promo")
+    @Column(name = "description", length = 255, nullable = false)
+	private String description;
+    
+    public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Column(name = "sent_promo")
 	private Boolean sentPromo = Boolean.FALSE;
     
 	public Long getId() {
@@ -31,13 +40,6 @@ public class Promotion {
 		this.id = id;
 	}
 
-	public LocalDateTime getExpiration() {
-		return expiration;
-	}
-
-	public void setExpiration(LocalDateTime expiration) {
-		this.expiration = expiration;
-	}
 
 	public String getCode() {
 		return code;

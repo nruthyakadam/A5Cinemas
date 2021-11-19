@@ -39,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/registration**",
                 "/forgot_password**",
                 "/select-movie**",
+                "/select-time**",
                 "/verify**",
                 "/reset_password**",
                 "/js/**",
@@ -47,11 +48,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/webjars/**",
                 "/edit/{id}",
                 "/account**",
-                "/save**").permitAll()
+                "/save**"
+                ).permitAll()
             .antMatchers("/add_new_movie").hasAnyAuthority("ADMIN")
             .antMatchers("/manage-promotions").hasAnyAuthority("ADMIN")
             .antMatchers("/schedule").hasAnyAuthority("ADMIN")
-            .antMatchers("/select-time").hasAnyAuthority("USER","ADMIN")
             .and()
             .formLogin()
             .loginPage("/login")

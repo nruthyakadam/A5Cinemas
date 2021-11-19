@@ -6,9 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!--     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
- -->
       <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+      
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
 <div id="title">
         <h1>A5 Cinemas</a></h1>
     </div>
@@ -28,49 +31,41 @@
 </head>
 
 <body id="editing-content" >
-<!--     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-     <span class="sr-only">Toggle navigation</span> <span
-      class="icon-bar"></span> <span class="icon-bar"></span> <span
-      class="icon-bar"></span>
-    </button>
-                <a class="navbar-brand" href="#" th:href="@{/}">Registration and
-     Login Module</a>
+  <br><br><br>  <br><br><br>  <br><br><br>  <br><br><br>
+  <div th:if="${param.success}">
+                    <div class="alert alert-info">Successfully saved schedule.</div>
+                </div>
+                
+    <div class="container">
+    <form method="post" th:action="@{/schedule}" th:object="${schedule}">
+        <div class="form-group row">
+            <div class="col-md-4 mt-5">
+                <label for="scheduleDate">Schedule Date</label>
+                <div class="input-group date">
+                    <input type="text" class="form-control" id="scheduleDate" autocomplete="off" th:field="*{scheduleDate}"/>
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav> -->
 
-<form action="#" th:action="@{/schedule}" th:object="${date}" enctype="multipart/form-data" method="post" >
-    <div id="edit-form"  >
-        <br><br><br>
-                <div th:if="${param.success}">
-                    <div class="alert alert-info">Successfully registered. Please check your mail for verification link!</div>
-                </div>
+        <button class="btn btn-primary" type="submit">Submit form</button>
+    </form>
 
-                <h1>Schedule Movie</h1>
-                
-                    <div class="form-group" th:classappend="${#fields.hasErrors('date')}? 'has-error':''" >
-                        <input type="datetime-local" th:field="*{date}" class="form-control" id="date" th:text="${#temporals.format(repertoire.date, 'yyyy-MM-dd HH:mm')}">
-                    </div><br>
-                    <div class="form-group" th:classappend="${#fields.hasErrors('time')}? 'has-error':''">
-                        <label for="time" class="control-label">*Time</label><br> <input id="time" type="time"
-                 min="12:00" max="18:00" 
-                 pattern="[0-9]{2}:[0-9]{2}" th:field="*{time}" >
-                        <p class="error-message" th:each="error : ${#fields.errors('time')}" th:text="${error}">Validation error</p>
-                    </div><br>
-                    
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Save Schedule</button><br>
-        </span>
-                    </div>
+</div>
+    
+   <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
 
-                
-            </div>
-</form>
-    <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script>
+    $('.input-group.date').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
     <footer>
         <span>1000 Lakeside Dr. Athens, GA</span>
         <span>706-XXX-XXXX</span>

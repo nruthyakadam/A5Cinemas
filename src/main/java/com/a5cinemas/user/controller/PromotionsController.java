@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.a5cinemas.user.dto.MovieCreationDto;
 import com.a5cinemas.user.dto.PromoCreationDto;
 import com.a5cinemas.user.model.CinemaUserDetails;
 import com.a5cinemas.user.model.Promotion;
@@ -25,6 +26,11 @@ public class PromotionsController {
     @Autowired
     private PromoService promoService;
     
+    @ModelAttribute("promo")
+    public PromoCreationDto promoCreationDto() {
+        return new PromoCreationDto();
+    }
+    
     @GetMapping("manage-promotions")
     public String manageMovies() {
         return "manage-promo";
@@ -32,42 +38,45 @@ public class PromotionsController {
     
     @GetMapping("promotions_list")
     public String getPromos(Model model) {
-        model.addAttribute("promos", promoService.findAll());
+        model.addAttribute("promo", promoService.findAll());
         return "promos";
     }
     
     @GetMapping("/add_promo")
     public String showPromonForm(Model model) {
-        return "manage-promo";
+        return "add-new-promo";
     }
 
     @PostMapping("/add_promo")
     public String addNewPromo(@ModelAttribute("promo") @Valid PromoCreationDto promoCreationDto,
-        BindingResult result) {
+        BindingResult result, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
     	if(result.hasErrors()) {
-            return "manage-promo";
+            return "add-new-promo";
         }
     	Promotion existing = promoService.findByCode(promoCreationDto.getCode());
     	if (existing != null) {
-    		result.rejectValue("code", null, "There is already a promotion with that code.");
+    		return "redirect:/add_promo?failure";
     	}
 
     	if (result.hasErrors()) {
-    		return "promos";
+    		return "add-new-promo";
     	}
     	promoService.save(promoCreationDto);
-        return "redirect:/creation?success"; //TODO: add success msg in creation.html like registration.html OR return "redirect:/list"
+    	promoService.sendPromos(promoCreationDto, getSiteURL(request));
+        return "redirect:/add_promo?success"; //TODO: add success msg in creation.html like registration.html OR return "redirect:/list"
     }
     
     @PostMapping("/send_promo")
     public String sendPromotionEmails(@ModelAttribute("promo") @Valid PromoCreationDto promoCreationDto,
         BindingResult result, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
-        promoService.sendPromos(promoCreationDto, getSiteURL(request));
+        
         return "redirect:/promos?success";
     }
     
     private String getSiteURL(HttpServletRequest request) {
         String siteURL = request.getRequestURL().toString();
         return siteURL.replace(request.getServletPath(), "");
-    } 
+    }
+    
+
 }

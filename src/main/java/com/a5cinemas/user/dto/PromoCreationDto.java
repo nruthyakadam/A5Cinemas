@@ -9,11 +9,10 @@ public class PromoCreationDto {
 	@NotEmpty
 	private String code;
 
-	@NotEmpty
-	private LocalDateTime expiration;
-	
 	private Boolean sentPromo;
 
+	private String description;
+	
 	public String getCode() {
 		return code;
 	}
@@ -22,13 +21,6 @@ public class PromoCreationDto {
 		this.code = code;
 	}
 
-	public LocalDateTime getExpiration() {
-		return expiration;
-	}
-
-	public void setExpiration(LocalDateTime expiration) {
-		this.expiration = expiration;
-	}
 
 	public Boolean getSentPromo() {
 		return sentPromo;
@@ -36,6 +28,14 @@ public class PromoCreationDto {
 
 	public void setSentPromo(Boolean sentPromo) {
 		this.sentPromo = sentPromo;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+ -->
+      <link th:rel="stylesheet" type="text/css" th:href="@{/css/home-style.css}"/>
+<div id="title">
+        <h1>A5 Cinemas</a></h1>
+    </div>
+    <style>
+    a { text-decoration: none;}
+    p {color:red;}
+    .whiteclass{
+    color:white;
+    }
+  	</style>
+    <div id="top-bar">
+        <a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage_movies}">Admin Page</a>
+    	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
+    	<a class="whiteclass" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    </div>
+</head>
+
+<body id="editing-content" >
+
+<form action="#" th:action="@{/add_promo}" th:object="${promo}" enctype="multipart/form-data" method="post" >
+<div id="edit-form"  >
+        <br>
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">Promo added successfully!</div>
+                </div>
+                <div th:if="${param.failure}">
+                    <div class="alert alert-info">Promo already exists!</div>
+                </div>   
+
+                <h3>Add and Send Promos</h3>
+     
+
+    
+      <label for="promodetails">Promo details</label></br>
+      <input  required type="text" id="promodetails" name="promodetails" placeholder="Enter promo details" th:field="*{description}" class="form-control">
+	  </br>
+	  <!--<label for="promoexpirydate">Promo ExpiryDate</label></br>
+      <input  required type="date" id="promoexpirydate" name="promoexpirydate" data-date-inline-picker="true" th:field="*{promoexpirydate}" class="form-control">
+      </br>-->
+      <label for="promocode">Promo Code</label></br>
+      <input type="text" id="promocode" name="promocode" placeholder="Enter a promocode" th:field="*{code}" class="form-control">
+      </br>
+      
+      <input  required type="submit" value="Add and Send Promotion e-mails">
+	  
+	
+	  
+      </div>
+    </form>
+  
+    <style>
+    input[type=text], select {
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    input[type=date], select {
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+	
+    input[type=submit] {
+      width: 20%;
+      background-color: #F44336;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #787878;
+    }
+   
+    </style>  
+    
+</body>
+</html>

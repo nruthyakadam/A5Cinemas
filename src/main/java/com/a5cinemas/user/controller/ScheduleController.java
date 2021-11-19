@@ -1,5 +1,6 @@
 package com.a5cinemas.user.controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,6 +13,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.a5cinemas.user.dto.MovieCreationDto;
 import com.a5cinemas.user.dto.ScheduleDto;
@@ -31,6 +35,7 @@ import com.a5cinemas.user.repo.ScheduleRepository;
 import com.a5cinemas.user.service.MovieService;
 
 @Controller
+@RequestMapping({"/schedule" })
 public class ScheduleController {
 
     @Autowired
@@ -42,30 +47,30 @@ public class ScheduleController {
     @Autowired
 	private MovieRepository movieRepository;
     
-   
+    @ModelAttribute("schedule")
+    public ScheduleDto movieScheduleDto() {
+        return new ScheduleDto();
+    }   
     
-    @GetMapping("/{movieTitle}/schedule")
-    public String showMovieScheduleForm(Model model, @PathVariable ("movieTitle") String movieTitle) {
-
-        Movie movie = movieService.findByTitle("11");
-        model.addAttribute("movie", movie);
-        model.addAttribute("schedule", new Schedule());
-        model.addAttribute("date", LocalDateTime.of(LocalDate.MIN, LocalTime.MIN));
+    @GetMapping
+    public String showMovieScheduleForm1(Model model/*, @PathVariable ("movieTitle") String movieTitlel*/) {
+    	Movie movie = movieService.findByTitle("11");
+    	model.addAttribute("movie", movie);
+        model.addAttribute("scheduleDate", new Schedule());
         return "movie-schedule";
     }
 
-    @PostMapping("/schedule")
+    @PostMapping
     public String addMovieSchedule(
-    		@RequestParam("date") LocalDateTime date, BindingResult result) {
+    		Schedule schedule, Model model, BindingResult result) {
     	if(result.hasErrors()) {
             return "movie-schedule";
         }
-    	Schedule schedule = new Schedule();
-    	schedule.setDate(date);
-    	schedule.setMovie(movieRepository.findByTitle("11"));
     	
+    	schedule.setMovie(movieRepository.findByTitle("11"));
+        model.addAttribute("schedule", schedule);
     	scheduleRepository.save(schedule) ;
-        return "redirect:/list";
+        return "redirect:/movie-schedule?success";
     }
     
 }

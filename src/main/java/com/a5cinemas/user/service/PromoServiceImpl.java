@@ -43,7 +43,7 @@ public class PromoServiceImpl implements PromoService {
 	public Promotion save(@Valid PromoCreationDto promoCreationDto) {
 		Promotion promotion = new Promotion();
 		promotion.setCode(promoCreationDto.getCode());
-		promotion.setExpiration(promoCreationDto.getExpiration());
+		promotion.setDescription(promoCreationDto.getDescription());
 		promotion.setSentPromo(promoCreationDto.getSentPromo());
 		Promotion savedPromotion = promoRepository.save(promotion);
 		return savedPromotion;
@@ -59,8 +59,8 @@ public class PromoServiceImpl implements PromoService {
 	public Promotion sendPromos(@Valid PromoCreationDto promoCreationDto, String siteURL) throws UnsupportedEncodingException, MessagingException {
 		Promotion promotion = promoRepository.findByCode(promoCreationDto.getCode());
 		promotion.setCode(promoCreationDto.getCode());
-		promotion.setExpiration(promoCreationDto.getExpiration());
-		promotion.setSentPromo(promoCreationDto.getSentPromo());
+		promotion.setDescription(promoCreationDto.getDescription());
+		promotion.setSentPromo(Boolean.TRUE);
 		Promotion savedPromo = promoRepository.save(promotion);
 		sendPromotionEmails(savedPromo, siteURL);
 		return savedPromo;
@@ -72,20 +72,21 @@ public class PromoServiceImpl implements PromoService {
 		String fromAddress = "support@a5cinemas.com";
 		String senderName = "A5 Cinemas Support";
 		String subject = "Save 30% at A5 Cinemas";
-		String content = "Hello [[name]],<br><br>" + "Take 30% (upto $20) off your first movie when you use promo code: [[promo]]<br>"
+		String content = "Hello,<br><br>" + "Take 30% (upto $20) off your first movie when you use promo code: [[promo]]<br>"
 				+ "Thanks and Regards,<br>"
 				+ "A5 Cimeas<br>" + "Ph: (706)-714-XXXX<br>" + "Add.: Lakeside Dr, Athens-30605";
 
 		List<User> users = userRepository.findAll();
-		String toAddresses = new String();
+		StringBuilder toAddresses = new StringBuilder();
 		for (User user : users) {
 			if(user.getRecievePromotion()) {
-				toAddresses.concat(user.getEmail()).concat(", ");
+				toAddresses.append(user.getEmail()).append(", ");
 			}
 		}
 		
+		
 		MimeMessage message = mailSender.createMimeMessage();
-		InternetAddress[] parse = InternetAddress.parse(toAddresses , true);
+		InternetAddress[] parse = InternetAddress.parse(toAddresses.toString() , true);
 		message.setRecipients(javax.mail.Message.RecipientType.TO, parse);
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 
