@@ -32,29 +32,32 @@
 
     <div class="wrapper">
         <div id="movie">
-            <img id="poster"
-                src="https://m.media-amazon.com/images/M/MV5BMjM3MjQ1MzkxNl5BMl5BanBnXkFtZTgwODk1ODgyMjI@._V1_.jpg">
+            <img id="poster" th:src="${movie.poster}">
         </div>
         <div id="movie-info">
-            <p id="movie-title"><b>Baby Driver</b></p>
-            <span th:text="${movie.category} + ' | ' + ${movie.rating}">Category: Action/Crime/Drama</span><br>
-            <p><b>Rating: </b>R</p>
-            <p><b>Runtime: </b>1h 53min</p>
-            <p><b>Categories: </b>Action, Crime, Drama</p>
-            <p><b>Director: </b>Edgar Wright</p>
-            <p><b>Starring: </b>Ansel Elgort, Jon Bernthal, Jon Hamm, Eiza Gonzalez, Kevin Spacey, Jamie Foxx</p>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/z2z857RSfhk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <b><p th:text="${movie.title}"></p></b>
+ 	        <p><b>Category: </b><span th:text="${movie.category}"/></p>
+ 			<p><b>Rating: </b><span th:text="${movie.rating}"/></p>
+ 			<p><b>Runtime: </b><span th:text="${movie.runtime}"/></p>
+ 			<p><b>Language: </b><span th:text="${movie.language}"/></p>
+ 			<p><b>Description: </b><span th:text="${movie.description}"/></p>
+ 			<p><b>Director: </b><span th:text="${movie.director}"/></p>
+ 			<p><b>Producer: </b><span th:text="${movie.producer}"/></p>
+ 			<p><b>Starring: </b><span th:text="${movie.cast}"/></p>
+ 			<p><b>Review: </b><span th:text="${movie.review}"/></p>
+            <iframe width="560" height="315" 	src="https://www.youtube.com/embed/z2z857RSfhk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        	<br><br><br><br><br>
         </div>
 
         <div class="times">
-            <a href="select-seats.html">1:00</a>
-            <a href="select-seats.html">2:30</a>
-            <a href="select-seats.html">4:00</a>
-            <a href="select-seats.html">5:00</a>
-            <a href="select-seats.html">6:30</a>
-            <a href="select-seats.html">7:00</a>
-            <a href="select-seats.html">8:00</a>
-            <a href="select-seats.html">9:00</a>
+            <a th:href="@{/select-seats}">1:00</a><br><br><br>
+            <a th:href="@{/select-seats}">2:30</a><br><br><br>
+            <a th:href="@{/select-seats}">4:00</a><br><br><br>
+            <a th:href="@{/select-seats}">5:00</a><br><br><br>
+            <a th:href="@{/select-seats}">6:30</a><br><br><br>
+            <a th:href="@{/select-seats}">7:00</a><br><br><br>
+            <a th:href="@{/select-seats}">8:00</a><br><br><br>
+            <a th:href="@{/select-seats}">9:00</a><br><br><br>
         </div>
     </div>
 

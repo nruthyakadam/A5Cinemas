@@ -39,10 +39,10 @@ public class BookTicketController {
 //        return "select-time";
 //    }
     
-    @GetMapping("/select-time")
+    @GetMapping("/select-seats")
     public String selectTime(Model model) {
          
-        return "select-time";
+        return "select-seats";
     }
     
     @RequestMapping(path = {"/","/select-time"})
@@ -53,6 +53,7 @@ public class BookTicketController {
         model.addAttribute("movie", movie);
         return "select-time";
     }
+    
     
    
 }

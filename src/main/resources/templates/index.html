@@ -39,7 +39,7 @@
 	</form>
 	<form th:action="@{/searchByCategory}"  method="get">
 		<select id="genre" name="genre" class="form-control">
-		<option value="" disabled selected>Movie Category</option>
+		<option disabled selected>Movie Category</option>
         <option th:value="Drama">Drama</option>
         <option th:value="Horror">Horror</option>
         <option th:value="Romance">Romance</option>
@@ -53,7 +53,6 @@
         <option th:value="Family">Family</option>
       </select>
 		<button type="submit" class="btn btn-info">Search</button>
-		<button type="submit" class="btn btn-info">Reset</button>
 		<div th:if="${param.failure}">
                     <div class="alert alert-info"><p class="text-warning" th:text="'There is no movie in this category.'"></p></div>
                 </div>
@@ -66,18 +65,24 @@
 	
 	<div th:each="movie : ${currentMovies}"  class="container">
 <!--     	<a sec:authorize="isAuthenticated()" th:href="@{/select-time}" >
- -->        <div class="movie">
-            <img th:src="${movie.poster}" th:href="@{/select-time}">
-            <h2 th:text="${movie.title}"></h2><br>
-            <span th:text="${movie.category} + ' | ' + ${movie.rating}">Category: Action/Crime/Drama</span><br>
-            <span th:text="'Director: ' + ${movie.director}">Director: Edgar Wright</span><br>
+
+ -->     <div class="movie">
 			<form sec:authorize="isAuthenticated()" th:action="@{/select-time}">
-    			<button type="submit" name="submit" value="value" class="link-button">Book Tickets</button>
+
+				<img th:src="${movie.poster}">
+				<h2 th:text="${movie.title}"></h2>
+				<br> <span
+					th:text="${movie.category} + ' | ' + ${movie.rating}">Category:
+					Action/Crime/Drama</span><br> <span
+					th:text="'Director: ' + ${movie.director}"></span><br>
+					<input type="hidden" name="title"
+					th:value="${movie.title}">
+				<button type="submit" name="submit" th:value="The"
+					class="link-button">Book Tickets</button>
+				<button type="submit" name="submit" th:value="${movie}"
+					class="link-button">See Movie Details</button>
 			</form>
-			<form sec:authorize="!isAuthenticated()" th:action="@{/select-movie}">
-    			<button type="submit" name="submit" th:value="${movie}" class="link-button">See Movie Details</button>
-			</form> 
-        </div>
+		</div>
 <!--        </a>
  -->    </div>
 

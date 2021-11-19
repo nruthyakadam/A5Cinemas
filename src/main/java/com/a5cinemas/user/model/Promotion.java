@@ -14,7 +14,7 @@ public class Promotion {
     @Column(name = "id")
     private Long id;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime expiration;
 
     @Column(name = "code", length = 255, nullable = false)

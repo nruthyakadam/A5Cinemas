@@ -3,18 +3,26 @@
 
 <head>
     <title>Select Seats</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet"th:href="@{/css/style.css}">
     <div id="title">
-        <h1><a href="select-movie.html">A5 Cinemas</a></h1>
+        <h1>A5 Cinemas</a></h1>
     </div>
+    <style>
+    a { text-decoration: none;}
+  	.whiteclass{
+    color:white;
+    }
+  	</style>
     <div id="top-bar">
-        <a href="select-movie.html">Movies</a>
-        <a>Offers</a>
-        <a href="login-page.html">Login</a>
+    	<a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+    	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
+    	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
+    	<a class="whiteclass" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
     </div>
 </head>
 
-<body scroll="no" style="overflow: hidden">
+<body >
 
     <div class="steps">
         <a id="select-movie" href="select-movie.html">Select a movie > </a>
@@ -22,14 +30,11 @@
         <span id="select-seats">Select seats > </span>
         <span id="next-steps">Checkout</span>
     </div>
-
+<br /><br />
     <div class="row">
         <div class="column" id="left-column">
             <table id="seats">
                 <tr>
-                    <td colspan="14">
-                        <div class="screen">SCREEN</div>
-                    </td>
 
                     <br />
                 </tr>
@@ -209,12 +214,8 @@
                     <td><input type="checkbox" class="seats" value="J12"></td>
                 </tr>
             </table>
-        </div>
+        </div><br /><br /><br /><br /><br /><br />
         <div class="column" id="right-side-column">
-            <div id="movie">
-                <img id="poster"
-                    src="https://m.media-amazon.com/images/M/MV5BMjM3MjQ1MzkxNl5BMl5BanBnXkFtZTgwODk1ODgyMjI@._V1_.jpg">
-            </div>
             <div id="movie-info">
                 <p id="movie-title"><b>Baby Driver</b></p>
             </div>
