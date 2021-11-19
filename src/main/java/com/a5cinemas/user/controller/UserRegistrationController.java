@@ -33,7 +33,12 @@ public class UserRegistrationController {
     public UserRegistrationDto userRegistrationDto() {
         return new UserRegistrationDto();
     }
-
+    
+    @GetMapping("manage-users")
+    public String manageMovies(Model model) {
+        return "ManageUsers";
+    }
+    
     @GetMapping
     public String showRegistrationForm(Model model) {
         return "registration";

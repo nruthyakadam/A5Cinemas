@@ -8,14 +8,17 @@
         <h1>A5 Cinemas</a></h1>
     </div>
     <style>
-    a { text-decoration: none; color: white}
+    a { text-decoration: none;}
+  	.whiteclass{
+    color:white;
+    }
   	</style>
     <div id="top-bar">
-    	<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
-    	<a sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
-    	<a sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
-    	<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
-        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    	<a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+    	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
+    	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
+    	<a class="whiteclass" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
     </div>
 </head>
 
@@ -34,6 +37,7 @@
         </div>
         <div id="movie-info">
             <p id="movie-title"><b>Baby Driver</b></p>
+            <span th:text="${movie.category} + ' | ' + ${movie.rating}">Category: Action/Crime/Drama</span><br>
             <p><b>Rating: </b>R</p>
             <p><b>Runtime: </b>1h 53min</p>
             <p><b>Categories: </b>Action, Crime, Drama</p>

@@ -11,11 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.a5cinemas.user.service.UserService;
 import com.a5cinemas.user.service.UserServiceImpl;
 
 
@@ -33,6 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserServiceImpl userService;
 
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -40,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(
                 "/registration**",
                 "/forgot_password**",
-                //"/select-movie**",
+                "/select-movie**",
                 "/verify**",
                 "/reset_password**",
                 "/js/**",
@@ -50,7 +48,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/edit/{id}",
                 "/account**",
                 "/save**").permitAll()
+            .antMatchers("/add_new_movie").hasAnyAuthority("ADMIN")
             .antMatchers("/manage-promotions").hasAnyAuthority("ADMIN")
+            .antMatchers("/schedule").hasAnyAuthority("ADMIN")
             .antMatchers("/select-time").hasAnyAuthority("USER","ADMIN")
             .and()
             .formLogin()
@@ -69,6 +69,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             //.and()
            // .rememberMe().tokenRepository(persistentTokenRepository());
     }
+    
+  
 //TODO
 //    @Bean
 //    public PersistentTokenRepository persistentTokenRepository() {

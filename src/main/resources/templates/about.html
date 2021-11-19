@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/home-style111.css}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<nav class="header">
+  <a href="#default" class="logo">A5 Cinemas</a>
+  <div class="header-right">
+    <a class="active" href="#home">Log In</a>
+    <input class="active" type="search" value="" id="search" placeholder="search here" onchange="openPage()">
+	<div class="dropdown">
+    <button class="dropbtn">Genre
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+	  <a href="#">All</a>
+      <a href="actionmovies.html">Action</a>
+      <a href="horrormovies.html">Horror</a>
+      <a href="comedymovies.html">Comedy</a>
+    </div>
+  </div> 
+  </div>
+</nav>
+
+    <div class="steps">
+	    <h3>Current movies    <a href="#">View all</a> </h3><br>
+        
+       
+    </div>
+
+    <div class="container">
+        <div id="EDGE OF TOMORROW" class="movie">
+			<a href="https://www.youtube.com/watch?v=vw61gCe2oqI"><img src="https://imgr.search.brave.com/pv5qwAbW7CneFoJm6cLHgzRn-1Dz7928GIio7HQmxXo/fit/1000/1200/ce/1/aHR0cDovL2Nkbi5j/b2xsaWRlci5jb20v/d3AtY29udGVudC91/cGxvYWRzL2VkZ2Ut/b2YtdG9tb3Jyb3ct/cG9zdGVyMS5qcGc" alt="movies"></a>
+            <h4>EDGE OF TOMORROW</h4>
+			<p>imdb rating:6/10</p>
+        </div>
+        <div id="GROWN UPS" class="movie">
+            <a href="https://www.youtube.com/watch?v=RanCz8X71sc"><img src="https://imgr.search.brave.com/qfrMtQCwTShDQMBtpRRtmPnxtp--8VCQ_H7_EONO5x0/fit/316/225/ce/1/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4y/S0NyLU5nQzA4UUxQ/ZV9saFFaNzZ3SGFM/SCZwaWQ9QXBp" alt="movies"></a>
+            <h4>GROWN UPS</h4>
+			<p>imdb rating:6/10</p>
+        </div>
+        <div id="THE DARK KNIGHT" class="movie">
+            <a href="https://www.youtube.com/watch?v=EXeTwQWrcwY"><img src="https://imgr.search.brave.com/qS7pAQBPF5zkhKp-swllGKRaniYdOgBTUvuZAkkj8Rk/fit/316/225/ce/1/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5y/dnhrbTNac3dmZUd5/bVh3alQ2ODZ3SGFM/RyZwaWQ9QXBp" alt="movies"></a>
+            <h4>THE DARK KNIGHT</h4>
+			<p>imdb rating:9/10</p>
+        </div>
+    </div>
+	<div class="steps">
+	    <h3>UpComing movies    <a href="upcomingMovies.html">View all</a> </h3><br>
+        
+       
+    </div>
+
+    <div class="container">
+        <div id="MATRIX 4" class="movie">
+			<a href="https://www.youtube.com/watch?v=CgjjMKP4ipg"><img src="https://imgr.search.brave.com/bIr8Ium4dVvX_qH-kG-7Ys9FNLWLktaOmpZzU8g_U5k/fit/844/225/ce/1/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC56/bGg3bVItYktERnMw/V3ZuclJVZ29nSGFF/SyZwaWQ9QXBp" alt="movies"></a>
+            <h4>MATRIX 4</h4>
+        </div>
+        <div id="ETERNALS" class="movie">
+            <a href="https://www.youtube.com/watch?v=x_me3xsvDgk"><img src="https://imgr.search.brave.com/4IaQB_CHLZD0HAn--B7PlNbng0uphYr-D7Ufnxpe6zc/fit/1200/638/ce/1/aHR0cHM6Ly93aWtp/b2ZuZXJkcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjEv/MTEvRXRlcm5hbHMu/anBn" alt="movies"></a>
+            <h4>ETERNALS</h4>
+        </div>
+        <div id="NO TIME TO DIE" class="movie">
+            <a href="https://www.youtube.com/watch?v=N_gD9-Oa0fg"><img src="https://imgr.search.brave.com/Nns81hdp_lp6w1JnIZ1EJ863W5eFbpQ2WydDvqT1KoU/fit/379/225/ce/1/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5H/M3loM0t0SzNyU1ZO/aGhhb3NENk9nSGFK/USZwaWQ9QXBp" alt="movies"></a>
+            <h4>NO TIME TO DIE</h4>
+        </div>
+    </div>
+	<script>
+		function openPage(){
+			var x= document.getElementById("search").value;
+			if (x==="Edge of Tomorrow"){
+				window.location.href="#Edge of Tomorrow";
+			}
+			else if (x==="GROWN UPS"){
+				window.location.href="#GROWN UPS";
+			}
+			else if (x==="THE DARK KNIGHT"){
+				window.location.href="#THE DARK KNIGHT";
+			}
+			else if (x==="ETERNALS"){
+				window.location.href="#ETERNALS";
+			}
+			else if (x==="NO TIME TO DIE"){
+				window.location.href="#NO TIME TO DIE";
+			}
+			else if (x==="MATRIX 4"){
+				window.location.href="#MATRIX 4";
+			}
+			else{
+				alert("Search for valid movies");
+			}			
+			
+		}
+	</script>
+<footer>
+  <span>1000 Lakeside Dr. Athens, GA</span>
+  <span>706-XXX-XXXX</span>
+</footer>
+</body>
+</html>

@@ -18,6 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<webjars-locator.version>0.30</webjars-locator.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,7 +63,11 @@
 			<artifactId>jquery</artifactId>
 			<version>3.2.1</version>
 		</dependency>
-
+		<dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>${webjars-locator.version}</version>
+        </dependency>
 		<!-- mysql connector -->
 		<dependency>
 			<groupId>mysql</groupId>

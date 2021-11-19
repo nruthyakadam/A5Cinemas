@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.a5cinemas.user.dto.UserProfileDto;
 import com.a5cinemas.user.dto.UserRegistrationDto;
@@ -27,7 +28,6 @@ import com.a5cinemas.user.model.Role;
 import com.a5cinemas.user.model.User;
 import com.a5cinemas.user.repo.UserRepository;
 
-import antlr.StringUtils;
 import net.bytebuddy.utility.RandomString;
 
 @Service
@@ -57,7 +57,8 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(registration.getEmail());
 		user.setPassword(passwordEncoder.encode(registration.getPassword()));
 		user.setAddress(registration.getAddress());
-		user.setCard(passwordEncoder.encode(registration.getCard()));
+		if(!StringUtils.isEmpty(registration.getCard())){
+		user.setCard(passwordEncoder.encode(registration.getCard()));}
 		user.setRecievePromotion(registration.getRecievePromotion());
 		user.setRoles(Arrays.asList(new Role("USER")));
 		String randomCode = RandomString.make(64);
@@ -173,6 +174,8 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByEmail(email);
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
+		}else if(!user.isEnabled()) {
+			throw new UsernameNotFoundException("Please click on the verification link sent to your email.");
 		}
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
 				mapRolesToAuthorities(user.getRoles()));

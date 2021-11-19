@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+ -->
+      <link th:rel="stylesheet" type="text/css" th:href="@{/css/home-style.css}"/>
+<div id="title">
+        <h1>A5 Cinemas</a></h1>
+    </div>
+    <style>
+    a { text-decoration: none;}
+    p {color:red;}
+    .whiteclass{
+    color:white;
+    }
+  	</style>
+    <div id="top-bar">
+        <a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage_movies}">Admin Page</a>
+    	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
+    	<a class="whiteclass" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    </div>
+</head>
+
+<body id="editing-content" >
+
+<form action="#" th:action="@{/add_new_movie}" th:object="${movie}" enctype="multipart/form-data" method="post" >
+<div id="edit-form"  >
+        <br><br><br>
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">Movie added successfully!</div>
+                </div>
+
+                <h3>Add a new movie</h3>
+      <label for="movietitlename">Title</label>
+      <input required type="text" id="movietitlename" name="title" placeholder="Movie Title" th:field="*{title}" class="form-control">
+
+      <label for="directorname">Director</label>
+      <input  required type="text" id="directorname" name="director" placeholder="Director" th:field="*{director}" class="form-control">
+
+	  <label for="producer">Producer</label>
+      <input  required type="text" id="producer" name="producer" placeholder="Enter in the form HH:MM" th:field="*{producer}" class="form-control">
+
+      <label for="starring">Starring</label>
+      <input  required type="text" id="starring" name="starring" placeholder="Actors" th:field="*{cast}" class="form-control">
+
+      <label for="rating">Rating</label>
+      <select  required id="rating" name="rating" th:field="*{rating}" class="form-control">
+        <option value="" selected>Movie Rating</option>
+        <option value="grating">G</option>
+        <option value="pgrating">PG</option>
+        <option value="pg13rating">PG-13</option>
+        <option value="rrating">R</option>
+        <option value="nc17ating">NC-17</option>
+      </select>
+  
+      <label for="genre">Category</label>
+      <select id="genre" name="genre" th:field="*{genre}" class="form-control">
+		<option value="" selected>Movie Category</option>
+        <option th:value="Drama">Drama</option>
+        <option th:value="Horror">Horror</option>
+        <option th:value="Romance">Romance</option>
+        <option th:value="Comedy" th:text="Comedy"></option>
+        <option th:value="Thriller">Thriller</option>
+        <option th:value="Musical">Musical</option>
+        <option th:value="Mystery">Mystery</option>
+        <option th:value="Historical">Historical</option>
+        <option th:value="Fantasy">Fantasy</option>
+        <option th:value="Bio">Biographical</option>
+        <option th:value="Family">Family</option>
+      </select>
+    
+      <label for="runtime">Runtime</label>
+      <input  required type="text" id="runtime" name="runtime" placeholder="Enter the length in minutes" th:field="*{runtime}" class="form-control">
+
+	  <label for="description">Description</label>
+      <input  required type="text" id="description" name="description" placeholder="Description" th:field="*{description}" class="form-control">
+      
+      <label for="description">Review</label>
+      <input type="text" id="review" name="review" placeholder="Review" th:field="*{review}" class="form-control">
+      
+      
+      <label for="language">Language</label>
+      <input  required type="text" id="language" name="language" placeholder="Language" th:field="*{language}" class="form-control">
+      
+      <label for="poster1">Poster</label>
+      <input  required type="text" id="poster1" name="poster1" placeholder="Enter poster's link" th:field="*{poster}" class="form-control">
+      
+      <label for="trailer">Trailer</label>
+      <input  required type="text" id="trailer" name="trailer" placeholder="Enter trailer's link" th:field="*{trailer}" class="form-control">
+
+      <input  required type="submit" value="Add Movie">
+      </div>
+    </form>
+  
+    <style>
+    input[type=text], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    input[type=submit] {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+   
+    </style>  
+    
+</body>
+</html>

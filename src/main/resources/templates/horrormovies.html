@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="home-style111.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<nav class="header">
+  <a href="#default" class="logo">A5 Cenimas</a>
+  <div class="header-right">
+    <a class="active" href="#home">Log In</a>
+    <input class="active" type="search" value="" id="search" placeholder="search here" onchange="openPage()">
+	<div class="dropdown">
+    <button class="dropbtn">Genre
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+	  <a href="about.html">All</a>
+      <a href="actionmovies.html">Action</a>
+      <a href="#">Horror</a>
+      <a href="comedymovies.html">Comedy</a>
+    </div>
+  </div> 
+  </div>
+</nav>
+
+    <div class="steps">
+	    <h3>Horror movies    </h3><br>
+    </div>
+
+    <div class="container">
+        <div id="GET OUT" class="movie">
+			<a href="https://www.youtube.com/watch?v=DzfpyUB60YY"><img src="https://imgr.search.brave.com/L8ZxXOWFNx8Qp8f9BYFfN0avHcD2aIzyiSAGWwIohSU/fit/332/225/ce/1/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5u/MEJnUVB0UnNqMkR2/eUVHQzBhcU13SGFL/aiZwaWQ9QXBp" alt="movies"></a>
+            <h4>GET OUT</h4>
+			<p>imdb rating:7.7/10</p>
+        </div>
+        <div id="THE EXORCISM OF EMILY ROSE" class="movie">
+            <a href="https://www.youtube.com/watch?v=Bi-PLwxwvy8"><img src="https://imgr.search.brave.com/u7A3JATBwqYflpz0JZW0lmJq9kBlSdEAzZW_p7-SAGE/fit/316/225/ce/1/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5n/N3VwcFBsbWdzZ3Nx/c2RyODRBTS1nSGFM/SCZwaWQ9QXBp" alt="movies"></a>
+            <h4>THE EXORCISM OF EMILY ROSE</h4>
+			<p>imdb rating:6.7/10</p>
+        </div>
+    </div>
+	<script>
+		function openPage(){
+			var x= document.getElementById("search").value;
+			if (x==="GET OUT"){
+				window.location.href="#GET OUT";
+			}
+			else if (x==="THE EXORCISM OF EMILY ROSE"){
+				window.location.href="#THE EXORCISM OF EMILY ROSE";
+			}
+			else{
+				alert("Search for valid movies");
+			}			
+			
+		}
+	</script>
+<footer>
+  <span>1000 Lakeside Dr. Athens, GA</span>
+  <span>706-XXX-XXXX</span>
+</footer>
+</body>
+</html>

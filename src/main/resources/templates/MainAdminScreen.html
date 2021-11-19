@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" th:href="@{/css/home-style.css}">
+    
+
+    <title>Admin Screen</title>
+	<div id="title">
+		<br>
+        <h1>A5 Cinemas</h1>
+    </div>
+    <style>
+    a { text-decoration: none;}
+    .whiteclass{
+    color:white;
+    }
+  	</style>
+    <div id="top-bar">
+    	<a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+    	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
+    	<a class="whiteclass" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    </div>
+</head>
+<body>
+    <div class="top">
+	        <br><br>
+	        	<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage_movies}">Manage Movies</a>
+	        	<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-users}">Manage Users</a>
+	       		<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+                <!-- <button  th:href="@{/manage-promotions}" class="managemovies"> 
+                    Manage Movies
+                </button>
+                <button  onclick="manageUsersFunction()" class="manageusers"> 
+                    Manage Users
+                </button>
+                <button  onclick="managePromosFunction()" class="managepromotions">
+                    Manage Promotions
+                </button> -->
+    </div>
+    <footer>
+        <span>1000 Lakeside Dr. Athens, GA</span>
+        <span>706-XXX-XXXX</span>
+    </footer>
+    
+</body>
+</html>
+
+<style> 
+
+footer{
+    background-color: #F44336;
+    color: white;
+    width: 110%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.top h3{
+    padding-top:70px;
+}
+#top-bar{
+    color: white;
+    font-size: 20px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-top: 40px;
+    margin-right: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#top-bar a{
+    margin-left: 20px;
+}
+#top-bar a:hover {
+    cursor:pointer;
+    text-shadow: 3px 3 px black;
+}
+#effect{
+    margin: 0;
+    text-align: center;
+    user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#title{
+    width: 100%;
+    background-color: #F44336;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-left: -10px;
+    margin-top: -10px;
+    font-size: 25px;
+    color: white;
+    text-align: left;
+    padding-left: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.top {
+margin-left: -10px;
+margin-top: -10px;
+margin-right: -10px;
+padding-bottom: 400px;
+padding-left: 30px;
+top: 0;
+    left: 0;
+ text-align: center;
+  background:#F44336;
+  color: white;
+  font-size: 100px;
+  font-family: Arial, Helvetica, sans-serif
+}
+.managemovies, .managepromotions, .manageusers {
+font-size: 30px;
+border-radius: 20px;
+padding: 14px 40px;
+color:black;
+background: white;
+font-family: Arial, Helvetica, sans-serif
+}
+
+</style>
+
+<script>
+    function manageMoviesFunction() {
+window.open("ManageMoviesScreen.html", null, "width=400,height=300");
+}
+</script>
+<script>
+function manageUsersFunction() {
+window.open("ManageUsers.html", null, "width=400,height=300");
+}
+</script>
+
+<script>
+    function managePromosFunction() {
+    window.open("manage-promo.html", null, "width=400,height=300");
+    }
+    </script>

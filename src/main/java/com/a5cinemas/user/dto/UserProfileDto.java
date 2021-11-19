@@ -1,6 +1,5 @@
 package com.a5cinemas.user.dto;
 
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 

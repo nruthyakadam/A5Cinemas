@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="home-style111.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<nav class="header">
+  <a href="#default" class="logo">A5 Cenimas</a>
+  <div class="header-right">
+    <a class="active" href="#home">Log In</a>
+    <input class="active" type="search" value="" id="search" placeholder="search here" onchange="openPage()">
+	<div class="dropdown">
+    <button class="dropbtn">Genre
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+	  <a href="about.html">All</a>
+      <a href="actionmovies.html">Action</a>
+      <a href="horrormovies.html">Horror</a>
+      <a href="#">Comedy</a>
+    </div>
+  </div> 
+  </div>
+</nav>
+
+    <div class="steps">
+	    <h3>Comedy movies    </h3><br>
+    </div>
+
+    <div class="container">
+        <div id="GROWN UPS" class="movie">
+			<a href="https://www.youtube.com/watch?v=RanCz8X71sc"><img src="https://imgr.search.brave.com/qfrMtQCwTShDQMBtpRRtmPnxtp--8VCQ_H7_EONO5x0/fit/316/225/ce/1/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4y/S0NyLU5nQzA4UUxQ/ZV9saFFaNzZ3SGFM/SCZwaWQ9QXBp" alt="movies"></a>
+            <h4>GROWN UPS</h4>
+			<p>imdb rating:6/10</p>
+        </div>
+        <div id="DOLEMITE IS MY NAME" class="movie">
+            <a href="https://www.youtube.com/watch?v=ZXekeaO-fOw"><img src="https://imgr.search.brave.com/AliLKhJJqi-mZQxbitaJDpFadUMk5lLDjMQaGnrjpfY/fit/1200/1200/ce/1/aHR0cHM6Ly9jZG4u/dHJhaWxlcmFkZGlj/dC5jb20vY29udGVu/dC9uZXRmbGl4L2Rv/bGVtaXRlLWlzLW15/LW5hbWUtcG9zdGVy/LmpwZw" alt="movies"></a>
+            <h4>DOLEMITE IS MY NAME</h4>
+			<p>imdb rating:7.3/10</p>
+        </div>
+    </div>
+	<script>
+		function openPage(){
+			var x= document.getElementById("search").value;
+			if (x==="GROWN UPS"){
+				window.location.href="#GROWN UPS";
+			}
+			else if (x==="DOLEMITE IS MY NAME"){
+				window.location.href="#DOLEMITE IS MY NAME";
+			}
+			
+			else{
+				alert("Search for valid movies");
+			}			
+			
+		}
+	</script>
+<footer>
+  <span>1000 Lakeside Dr. Athens, GA</span>
+  <span>706-XXX-XXXX</span>
+</footer>
+</body>
+</html>

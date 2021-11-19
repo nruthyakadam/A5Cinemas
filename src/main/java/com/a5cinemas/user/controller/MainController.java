@@ -1,12 +1,16 @@
 package com.a5cinemas.user.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +25,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.a5cinemas.user.dto.UserProfileDto;
 import com.a5cinemas.user.exception.CustomerNotFoundException;
 import com.a5cinemas.user.model.CinemaUserDetails;
+import com.a5cinemas.user.model.Movie;
+import com.a5cinemas.user.model.Schedule;
 import com.a5cinemas.user.model.User;
+import com.a5cinemas.user.repo.MovieRepository;
+import com.a5cinemas.user.repo.ScheduleRepository;
+import com.a5cinemas.user.service.MovieService;
 import com.a5cinemas.user.service.UserService;
 
 @Controller
@@ -30,21 +39,43 @@ public class MainController {
 	@Autowired
     private UserService userService;
 	
-    @GetMapping("/")
-    public String root() {
+	@Autowired
+	private ScheduleRepository scheduleRepository;
+	
+	@Autowired
+    private MovieService movieService;
+	
+	@GetMapping("/")
+    public String root(Model model) {
+    	
+    	List<Schedule> schedules = scheduleRepository.findAll();
+    	Set<Movie> currentMovies = new HashSet<>();
+    	if(null != schedules) {
+    		for(Schedule schedule: schedules) {
+    			if(null != schedule.getMovie()) {
+    				currentMovies.add(schedule.getMovie());
+    			}
+    		}
+    	}
+    	model.addAttribute("currentMovies", currentMovies);
+    	
+    	List<Movie> upcomingMovies = movieService.findAll();
+    	if(null != schedules) {
+    		for(Movie movie : currentMovies) {
+    			if(upcomingMovies.contains(movie)) {
+    				upcomingMovies.remove(movie);
+    			}
+    		}
+    	}
+    	model.addAttribute("upcomingMovies", upcomingMovies);
+    	return "index";
+    }
+
+	@GetMapping("/index")
+    public String index(Model model) {
         return "index";
     }
-
-    @GetMapping("/manage-promotions")
-    public String manageMovies() {
-        return "manage-promotions";
-    }
-    
-    @GetMapping("/select-time")
-    public String selectTime() {
-        return "select-time";
-    }
-
+	
     @GetMapping("/login")
     public String login(Model model) {
         return "login";

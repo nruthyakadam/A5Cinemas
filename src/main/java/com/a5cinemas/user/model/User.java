@@ -34,7 +34,7 @@ public class User {
 	@Column(name = "address", length = 255)
 	private String address;
 	
-	@Column(name = "card", length = 16)
+	@Column(name = "card", length = 255)
 	private String card;
 
 	private Boolean enabled = Boolean.FALSE;

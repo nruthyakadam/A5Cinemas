@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8" />
+    <title>View Profile</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <div id="title">
+        <h1>A5 Cinemas</a></h1>
+    </div>
+    <style>
+        a {
+            text-decoration: none;
+            color: white
+        }
+
+        p {
+            text-decoration: none;
+            color: red
+        }
+
+        .whiteclass {
+            color: white;
+        }
+    </style>
+    <div id="top-bar">
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    </div>
+</head>
+
+<body id="editing-content">
+    <div id="edit-form">
+        <h1 id="view-profile">View Profile</h1>
+        <br><br><br>
+        <img id="profile-pic" src="http://www.downloadclipart.net/medium/3824-male-portrait-clip-art.png"/>
+        <p class="profile-info" id="name">John Doe</p>
+        <p class="profile-info" id="email">jdoe@a5cinemas.com</p>
+        <p class="profile-info" id="address">1001 Broad St. Athens, GA 30606</p>
+        <a id="edit-profile" th:href="@{/edit-profile}" href="edit-profile.html">Edit Profile</a>
+    </div>
+
+    <footer>
+        <span>1000 Lakeside Dr. Athens, GA</span>
+        <span>706-XXX-XXXX</span>
+    </footer>
+</body>

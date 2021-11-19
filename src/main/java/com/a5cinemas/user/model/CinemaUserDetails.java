@@ -13,12 +13,12 @@ public class CinemaUserDetails implements UserDetails {
 	 */
 	private static final long serialVersionUID = 389794780328098947L;
 	private User user;
-     
+	Set<GrantedAuthority> authorities=null;
     public CinemaUserDetails(User user) {
         this.user = user;
     }
- 
-    @Override
+
+	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> roles = (Set<Role>) user.getRoles();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
@@ -28,7 +28,12 @@ public class CinemaUserDetails implements UserDetails {
         }
         return authorities;
     }
- 
+    
+    public void setAuthorities(Set<GrantedAuthority> authorities)
+    {
+        this.authorities=authorities;
+    }
+    
     @Override
     public String getPassword() {
         return user.getPassword();
