@@ -45,20 +45,19 @@
  			<p><b>Producer: </b><span th:text="${movie.producer}"/></p>
  			<p><b>Starring: </b><span th:text="${movie.cast}"/></p>
  			<p><b>Review: </b><span th:text="${movie.review}"/></p>
-            <iframe width="560" height="315" 	src="https://www.youtube.com/embed/z2z857RSfhk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<iframe width="560" height="315" th:src="@{https://www.youtube.com/embed/{url} (url=${movie.trailer})}"
+ 				title="YouTube video player" frameborder="0"
+ 				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 			
         	<br><br><br><br><br>
         </div>
 
-        <div class="times">
-            <a th:href="@{/select-seats}">1:00</a><br><br><br>
-            <a th:href="@{/select-seats}">2:30</a><br><br><br>
-            <a th:href="@{/select-seats}">4:00</a><br><br><br>
-            <a th:href="@{/select-seats}">5:00</a><br><br><br>
-            <a th:href="@{/select-seats}">6:30</a><br><br><br>
-            <a th:href="@{/select-seats}">7:00</a><br><br><br>
-            <a th:href="@{/select-seats}">8:00</a><br><br><br>
-            <a th:href="@{/select-seats}">9:00</a><br><br><br>
+        <div class="times" th:each="repertoire : ${repertoires}">
+        	<div>
+        		<button type="submit"><a th:href="@{'/movies/' +  ${repertoire.movie.getTitle()} + '/reservation/' + ${repertoire.id}}"
+        			th:text="${#temporals.format(repertoire.date, 'MM.dd.yyyy HH:mm')}"></a></button>
+        	<div>
         </div>
+
     </div>
 
     <footer>

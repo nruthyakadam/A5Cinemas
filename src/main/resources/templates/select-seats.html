@@ -4,6 +4,7 @@
 <head>
     <title>Select Seats</title>
     <link rel="stylesheet"th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reservation.css}"/>
     <div id="title">
         <h1>A5 Cinemas</a></h1>
     </div>
@@ -24,13 +25,13 @@
 
 <body >
 
-    <div class="steps">
+<!--     <div class="steps">
         <a id="select-movie" href="select-movie.html">Select a movie > </a>
         <a id="select-time" href="select-time.html">Select time ></a>
         <span id="select-seats">Select seats > </span>
         <span id="next-steps">Checkout</span>
-    </div>
-<br /><br />
+    </div> -->
+<!-- 
     <div class="row">
         <div class="column" id="left-column">
             <table id="seats">
@@ -232,7 +233,87 @@
             </div>
         </div>
     </div>
-    <script src="app.js"></script>
+    <script src="app.js"></script> -->
+    
+    
+    
+    
+    
+    
+    <div class="container my-2">
+    <div class="card">
+        <div class="card-body">
+            <div class="container my-5">
+            	<br><br><br><br>
+  <!--               <span id="next-steps" th:text="${movieName}"></span> -->
+
+                <form th:action="@{'/reservation/save/' + ${repertoireId}}" th:object="${seatInfo}" method="post">
+
+                    <div class="seatStructure" id="left-column">
+                        <center>
+
+                            <table id="seatsBlock">
+                                <p id="notification"></p>
+                                <tr>
+                                    <td colspan="16">
+                                        <div class="screen" th:text="${movieName}+': Screen'">Screen</div>
+                                    </td>
+                                    <td rowspan="22">
+                                        <div class="smallBox greenBox">Selected Seats</div><br/>
+                                        <div class="smallBox redBox">Unavailable Seats</div><br/>
+                                    </td>
+
+                                    <br/>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td></td>
+                                    <td>8</td>
+                                    <td>9</td>
+                                    <td>10</td>
+                                    <td>11</td>
+                                    <td>12</td>
+                                    <td>13</td>
+                                    <td>14</td>
+                                </tr>
+
+                                <tr th:each="row, iStat : ${rows}">
+                                    <th:block th:each="currentColum: ${#numbers.sequence(1, 14)}">
+                                        <td th:if="${currentColum == 1}" th:text="${row}">A</td>
+                                        <td>
+                                            <input th:field="*{map[__${row + currentColum}__]}" th:disabled="*{map[__${row + currentColum}__]}" type="checkbox" class="seats" th:classappend="*{map[__${row + currentColum}__]} ? redAfter : greenAfter" value="true">
+                                        </td>
+                                        <td th:if="${currentColum == 7}" class="seatGap"></td>
+                                    </th:block>
+                                </tr>
+
+                            </table>
+
+                            <input type = "hidden" th:value="${movieName}">
+                            <input type = "hidden" th:value="${repertoireId}">
+
+                            </br>
+                            
+                        </center>
+                    </div>
+                    
+                    <div><button type="submit">Continue</button></div>
+                </form>
+
+                <br/><br/><br><br><br>
+            </div>
+        </div>
+    </div>
+</div>
+    
 </body>
 
 <footer>

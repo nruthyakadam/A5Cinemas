@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+      
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
+<div id="title">
+        <h1>A5 Cinemas</a></h1>
+    </div>
+    <style>
+    a { text-decoration: none;}
+    p {color:red;}
+    .whiteclass{
+    color:white;
+    }
+  	</style>
+    <div id="top-bar">
+    	<a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage_movies}">Admin Page</a>
+        <a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
+    	<a class="whiteclass" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    </div>
+</head>
+<body>
+
+
+
+<div class="container my-5">
+<br><br><br><br><br><br><br><br>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <h1 th:text="${movieRepertoire.title}"> Movie Name</h1>
+                <form action="#" th:action="@{${repertoire.id != null ? '/movies/admin/updateRepertoire' : '/movies/admin/newRepertoire'}}" th:object="${repertoire}" method="post">
+                    <div th:if="${param.success}">
+                    <div class="alert alert-info">Successfully saved schedule.</div>
+                </div>
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="date" class="col-form-label">Schedule Date</label>
+                            <input type="datetime-local" th:field="*{date}" class="form-control" id="date" value="2021-01-20T13:01">
+                            <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="text-danger"></span>
+                            
+                            <!-- <div class="form-group" th:classappend="${#fields.hasErrors('date')}? 'has-error':''" >
+                        		<label for="firstName" class="control-label">*Schedule Date</label><br> <input id="schedule" class="form-control" type="text" th:field="*{date}" />
+                        		<p class="invalid" th:each="error : ${#fields.errors('date')}" th:text="${error}">Validation error</p>
+                    		</div><br> -->
+                            
+                        </div>
+                        <br>
+                        <div >
+                            <input type="submit" class="btn btn-primary" th:value="Save">
+                        </div>
+                        <div class="form-group col-md-8"></div>
+                    </div>
+                    <input type="hidden" name="movieId" th:value="${movieRepertoire.id}">
+                    <input type="hidden" name="repertoireId" th:value="${repertoire.id}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

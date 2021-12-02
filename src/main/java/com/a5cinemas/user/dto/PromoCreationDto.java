@@ -2,6 +2,7 @@ package com.a5cinemas.user.dto;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 
 public class PromoCreationDto {
@@ -12,7 +13,11 @@ public class PromoCreationDto {
 	private Boolean sentPromo;
 
 	private String description;
-	
+
+	private LocalDateTime expiryDate;
+
+	private int disountPercentage;
+
 	public String getCode() {
 		return code;
 	}
@@ -20,7 +25,6 @@ public class PromoCreationDto {
 	public void setCode(String code) {
 		this.code = code;
 	}
-
 
 	public Boolean getSentPromo() {
 		return sentPromo;
@@ -37,5 +41,21 @@ public class PromoCreationDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public LocalDateTime getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(LocalDateTime expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
+	public int getDisountPercentage() {
+		return disountPercentage;
+	}
+
+	public void setDisountPercentage(int disountPercentage) {
+		this.disountPercentage = disountPercentage;
+	}
+
 }

@@ -73,7 +73,8 @@
 				<span th:text="${movie.category} + ' | ' + ${movie.rating}"></span><br>
 				<span th:text="'Director: ' + ${movie.director}"></span><br>
 				<input type="hidden" name="title"th:value="${movie.title}">
-				<button type="submit" name="submit" th:value="${movie}" class="link-button">Book Tickets</button>
+				<button type="submit" sec:authorize="hasAuthority('USER')" name="submit" th:value="${movie}" class="link-button">Book Tickets</button>
+				<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{'/movies/admin/'+${movie.title}+'/newRepertoire'}">Add Schedule</a>
 			</form>
 		</div>
 <!--        </a>

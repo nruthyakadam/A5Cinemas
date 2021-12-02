@@ -53,6 +53,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/add_new_movie").hasAnyAuthority("ADMIN")
             .antMatchers("/manage-promotions").hasAnyAuthority("ADMIN")
             .antMatchers("/schedule").hasAnyAuthority("ADMIN")
+            .antMatchers("/movies/admin/*/newRepertoire").hasAnyAuthority("ADMIN")
+            .antMatchers("/movies/*/reservation/*").hasAnyAuthority("USER","ADMIN")
             .and()
             .formLogin()
             .loginPage("/login")

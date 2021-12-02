@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,20 +23,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.a5cinemas.user.dto.MovieCreationDto;
 import com.a5cinemas.user.dto.ScheduleDto;
 import com.a5cinemas.user.model.Movie;
+import com.a5cinemas.user.model.Repertoire;
 import com.a5cinemas.user.model.Schedule;
 import com.a5cinemas.user.repo.MovieRepository;
+import com.a5cinemas.user.repo.RepertoireRepo;
 import com.a5cinemas.user.repo.ScheduleRepository;
 import com.a5cinemas.user.service.MovieService;
 
+
+
 @Controller
-@RequestMapping({"/schedule" })
+@RequestMapping("/movies")
 public class ScheduleController {
 
     @Autowired
@@ -43,6 +44,9 @@ public class ScheduleController {
     
     @Autowired
 	private ScheduleRepository scheduleRepository;
+    
+    @Autowired
+    private RepertoireRepo repertoireRepo;
     
     @Autowired
 	private MovieRepository movieRepository;
@@ -73,4 +77,53 @@ public class ScheduleController {
         return "redirect:/movie-schedule?success";
     }
     
+   // @RequestMapping(path = {"/admin","/admin/{movieName}/newRepertoire"})
+    @GetMapping("/admin/{movieName}/newRepertoire")
+    public String showMovieRepertoireForm(Model model, @PathVariable ("movieName") String movieName) {
+
+        Movie movieRepertoire = movieRepository.findByTitle(movieName);
+        model.addAttribute("movieRepertoire", movieRepertoire);
+        model.addAttribute("repertoire", new Repertoire());
+        return "movie-repertoire";
+    }
+
+    @PostMapping("/admin/newRepertoire")
+    @Transactional
+    public String addMovieRepertoire(@ModelAttribute ("repertoire") Repertoire repertoire,
+                                @ModelAttribute("movieId") Long movieId, BindingResult result) {
+
+        repertoire.setMovie(movieRepository.getById(movieId));
+        repertoireRepo.save(repertoire) ;
+        return "redirect:/movies/admin/"+repertoire.getMovie().getTitle()+"/newRepertoire?success";
+    }
+    
+    @GetMapping("/admin/{movieName}/updateRepertoire/{repertoireId}")
+    public String showUpdateMovieRepertoireForm(Model model, @PathVariable ("movieName") String movieName,
+                                           @PathVariable("repertoireId") Long repertoireId) {
+
+        Repertoire repertoire = repertoireRepo.getById(repertoireId);
+        Movie movieRepertoire = movieRepository.findByTitle(movieName);
+        model.addAttribute("movieRepertoire", movieRepertoire);
+        model.addAttribute("repertoire", repertoire);
+        return "movie-repertoire";
+    }
+
+    @PostMapping("/admin/updateRepertoire")
+    @Transactional
+    public String updateMovieRepertoire(@ModelAttribute ("repertoire") Repertoire repertoire,
+                                @ModelAttribute("movieId") Long movieId,
+                                @ModelAttribute("repertoireId") Long repertoireId, BindingResult result) {
+
+        Repertoire repertoireFromDb = repertoireRepo.getById(repertoireId);
+        repertoireFromDb.setDate(repertoire.getDate());
+        return "redirect:/movies/list";
+    }
+
+    @GetMapping("/admin/deleteRepertoire/{repertoireId}")
+    @Transactional
+    public String deleteMovieRepertoire(Model model, @PathVariable("repertoireId") Long repertoireId) {
+
+        repertoireRepo.deleteById(repertoireId);
+        return "redirect:/movies/list";
+    }
 }

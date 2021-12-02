@@ -14,12 +14,18 @@ public class Promotion {
     @Column(name = "id")
     private Long id;
 
-
     @Column(name = "code", length = 255, nullable = false)
 	private String code;
     
     @Column(name = "description", length = 255, nullable = false)
 	private String description;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@Column(name= "expiry_date", nullable = false, unique = true)
+    private LocalDateTime expiryDate;
+    
+    @Column(name = "disc_percent")
+    private int disountPercentage;
     
     public String getDescription() {
 		return description;
@@ -55,6 +61,22 @@ public class Promotion {
 
 	public void setSentPromo(Boolean sentPromo) {
 		this.sentPromo = sentPromo;
+	}
+
+	public LocalDateTime getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(LocalDateTime expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
+	public int getDisountPercentage() {
+		return disountPercentage;
+	}
+
+	public void setDisountPercentage(int disountPercentage) {
+		this.disountPercentage = disountPercentage;
 	}
 	
 }
