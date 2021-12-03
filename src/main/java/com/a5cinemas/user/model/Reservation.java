@@ -34,6 +34,10 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "repertoire_id")
     private Repertoire repertoire;
+    
+    private Double ticketPrice;
+    
+    private Double cost;
 
 	public Long getId() {
 		return id;
@@ -81,5 +85,21 @@ public class Reservation {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Double getCost() {
+		return cost;
+	}
+
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
+
+	public Double getTicketPrice() {
+		return ticketPrice;
+	}
+
+	public void setTicketPrice(Double ticketPrice) {
+		this.ticketPrice = ticketPrice;
 	}
 }

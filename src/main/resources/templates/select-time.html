@@ -8,17 +8,14 @@
         <h1>A5 Cinemas</a></h1>
     </div>
     <style>
-    a { text-decoration: none;}
-  	.whiteclass{
-    color:white;
-    }
+    a { text-decoration: none; color: white}
   	</style>
     <div id="top-bar">
-    	<a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage_movies}">Admin Page</a>
-    	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
-    	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
-    	<a class="whiteclass" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
-        <a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    	<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+    	<a sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
+    	<a sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
+    	<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
     </div>
 </head>
 
@@ -57,7 +54,6 @@
         			th:text="${#temporals.format(repertoire.date, 'MM.dd.yyyy HH:mm')}"></a></button>
         	<div>
         </div>
-
     </div>
 
     <footer>

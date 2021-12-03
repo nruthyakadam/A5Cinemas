@@ -3,7 +3,6 @@ body {
     text-align: center;
     user-select: none;
     font-family:Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
 }
 body::-webkit-scrollbar {
     width: 10px;
@@ -99,7 +98,7 @@ body::-webkit-scrollbar-thumb {
 
 #left-column {
     height: 100%;
-    margin-top: 100px;
+    margin-top: 15%;
 }
 
 #right-column, #editing-content {
@@ -223,6 +222,10 @@ table {
     margin-left: 0px;
 }
 
+#login-link, #register-link {
+    cursor: pointer;
+}
+
 form i {
     margin-left: -40px;
     cursor: pointer;
@@ -293,4 +296,19 @@ footer span {
 
 .alert {
     margin-bottom: 15px;
+}
+
+label {
+  width: 125px;
+  display: inline-block;
+}
+
+input {
+  padding: 3px;
+}
+
+#total {
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid #bbb;
 }

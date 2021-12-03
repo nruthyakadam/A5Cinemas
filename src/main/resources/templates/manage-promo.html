@@ -24,14 +24,14 @@ a { text-decoration: none; color: white}
 <body>
 
 <head>
-    <title>Select Movie</title>
-    <link rel="stylesheet" href="home-style.css">
+    <title>Manage Promotions</title>
+    <link rel="stylesheet" type="text/css" href="home-style.css"/>
     <div id="title">
         <h1>A5 Cinemas</h1>
     </div>
     <div id="top-bar">
         <a sec:authorize="isAuthenticated()" th:href="@{/}">Home</a>
-    	<a sec:authorize="isAuthenticated()" th:href="@{/account}" ></a>
+    	<a sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
     	<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
     </div>
@@ -40,15 +40,14 @@ a { text-decoration: none; color: white}
 <table>
   <tr class="category">
     <th>Promotion Details</th>
-    <th>Promotion Expiry Date</th>
-    <th>Add/Delete Promotion</th>
-    <th>Send/Edit Promotion</th>
-    <th>Promotion Code</th>
+    <th>Expiry Date</th>
+    <th>Add/Delete</th>
+    <th>Promo Code</th>
   </tr>
   <tr>
     <td>$1.50 Off Small Popcorn</td>
     <td>
-        <input type="date" data-date-inline-picker="true" />
+        <input id="date-input" type="date" data-date-inline-picker="true" />
     </td>
     <td>
         <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
@@ -59,21 +58,12 @@ a { text-decoration: none; color: white}
                 Delete Promotion
             </button>
     </td>
-    <td>
-      <button  onclick="alert('Admin is able to send promotions to user screen')" class="add">
-          Send Promotion
-          </button>
-  
-          <button  onclick="alert('Admin is able to edit promotions from user screen')" class="delete">
-              Edit Promotion
-          </button>
-  </td>
     <td>KSF40L</td>
   </tr>
   <tr>
     <td>Buy 2 Small Popcorn & Get 1 Free Small Drink</td>
     <td>
-        <input type="date" data-date-inline-picker="true" />
+        <input id="date-input" type="date" data-date-inline-picker="true" />
     </td>
     <td>
         <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
@@ -84,21 +74,12 @@ a { text-decoration: none; color: white}
                 Delete Promotion
             </button>
     </td>
-    <td>
-      <button  onclick="alert('Admin is able to send promotions to user screen')" class="add">
-          Send Promotion
-          </button>
-  
-          <button  onclick="alert('Admin is able to edit promotions from user screen')" class="delete">
-              Edit Promotion
-          </button>
-  </td>
     <td>OMG35P</td>
   </tr>
   <tr>
     <td>$1.25 Off Small Fountain Drink</td>
     <td>
-        <input type="date" data-date-inline-picker="true" />
+        <input id="date-input" type="date" data-date-inline-picker="true" />
     </td>
     <td>
         <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
@@ -109,21 +90,12 @@ a { text-decoration: none; color: white}
                 Delete Promotion
             </button>
     </td>
-    <td>
-      <button  onclick="alert('Admin is able to send promotions to user screen')" class="add">
-          Send Promotion
-          </button>
-  
-          <button  onclick="alert('Admin is able to edit promotions from user screen')" class="delete">
-              Edit Promotion
-          </button>
-  </td>
     <td>NSR18C</td>
   </tr>
   <tr>
     <td>Buy 1 Large Fountain Drink & Get 1 Small Popcorn Free</td>
     <td>
-        <input type="date" data-date-inline-picker="true" />
+        <input id="date-input" type="date" data-date-inline-picker="true" />
     </td>
     <td>
         <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
@@ -134,21 +106,12 @@ a { text-decoration: none; color: white}
                 Delete Promotion
             </button>
     </td>
-    <td>
-      <button  onclick="alert('Admin is able to send promotions to user screen')" class="add">
-          Send Promotion
-          </button>
-  
-          <button  onclick="alert('Admin is able to edit promotions from user screen')" class="delete">
-              Edit Promotion
-          </button>
-  </td>
     <td>UTB98T</td>
   </tr>
   <tr>
     <td>Buy 2 Movie Tickets & Get 1 Ticket for 1/2 Price</td>
     <td>
-        <input type="date" data-date-inline-picker="true" />
+        <input id="date-input" type="date" data-date-inline-picker="true" />
     </td>
     <td>
         <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
@@ -159,21 +122,12 @@ a { text-decoration: none; color: white}
                 Delete Promotion
             </button>
     </td>
-    <td>
-      <button  onclick="alert('Admin is able to send promotions to user screen')" class="add">
-          Send Promotion
-          </button>
-  
-          <button  onclick="alert('Admin is able to edit promotions from user screen')" class="delete">
-              Edit Promotion
-          </button>
-  </td>
     <td>KQI03B</td>
   </tr>
   <tr>
     <td>Buy 3 Medium Fountain Drinks & Get 1 Free Small Pack of Candy</td>
     <td>
-        <input type="date" data-date-inline-picker="true" />
+        <input id="date-input" type="date" data-date-inline-picker="true" />
     </td>
     <td>
         <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
@@ -184,21 +138,12 @@ a { text-decoration: none; color: white}
             Delete Promotion
         </button>
     </td>
-    <td>
-      <button  onclick="alert('Admin is able to send promotions to user screen')" class="add">
-          Send Promotion
-          </button>
-  
-          <button  onclick="alert('Admin is able to edit promotions from user screen')" class="delete">
-              Edit Promotion
-          </button>
-  </td>
     <td>HWY74Y</td>
   </tr>
   <tr>
     <td>$1.75 Off Small Popcorn</td>
     <td>
-        <input type="date" data-date-inline-picker="true" />
+        <input id="date-input" type="date" data-date-inline-picker="true" />
     </td>
     <td>
         <button  onclick="alert('Admin is able to add promotions to user screen')" class="add">
@@ -209,22 +154,9 @@ a { text-decoration: none; color: white}
                 Delete Promotion
             </button>
     </td>
-    <td>
-      <button  onclick="alert('Admin is able to send promotions to user screen')" class="add">
-          Send Promotion
-          </button>
-  
-          <button  onclick="alert('Admin is able to edit promotions from user screen')" class="delete">
-              Edit Promotion
-          </button>
-  </td>
     <td>SHE26Y</td>
   </tr>
 </table>
-<br>
-<br>
-<button class="buttonstyle" onclick="addNewPromotionFunction()">Add New Promotion</button>
-
 </body>
 <footer>
   <span>1000 Lakeside Dr. Athens, GA</span>
@@ -232,21 +164,7 @@ a { text-decoration: none; color: white}
 </footer>
 </html>
 
-<script>
-  function addNewPromotionFunction() {
-  window.open("AddNewPromotion.html", null, "width=400,height=300");
-  }
-  </script>
-
 <style>
-   .buttonstyle{
-        font-size:25px;
-border-radius: 10px;
-background: #f44336
-;
-font-family: Arial, Helvetica, sans-serif
-    }
-
   h1 {
     width: 100%;
     background-color: #F44336;
@@ -298,6 +216,14 @@ body {
   .category{
     font-family: Arial, Helvetica, sans-serif;
     color: #c8e6ee;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  #date-input {
+    cursor: text;
   }
 
   footer {

@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class PromoCreationDto {
 
 	@NotEmpty
@@ -13,8 +15,6 @@ public class PromoCreationDto {
 	private Boolean sentPromo;
 
 	private String description;
-
-	private LocalDateTime expiryDate;
 
 	private int disountPercentage;
 
@@ -40,14 +40,6 @@ public class PromoCreationDto {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public LocalDateTime getExpiryDate() {
-		return expiryDate;
-	}
-
-	public void setExpiryDate(LocalDateTime expiryDate) {
-		this.expiryDate = expiryDate;
 	}
 
 	public int getDisountPercentage() {

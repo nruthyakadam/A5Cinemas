@@ -12,9 +12,11 @@ import org.springframework.ui.Model;
 import com.a5cinemas.user.dto.MovieCreationDto;
 import com.a5cinemas.user.model.CinemaUserDetails;
 import com.a5cinemas.user.model.Movie;
+import com.a5cinemas.user.model.Repertoire;
 import com.a5cinemas.user.model.Schedule;
 import com.a5cinemas.user.model.User;
 import com.a5cinemas.user.repo.MovieRepository;
+import com.a5cinemas.user.repo.RepertoireRepo;
 import com.a5cinemas.user.repo.ScheduleRepository;
 
 @Service
@@ -24,8 +26,9 @@ public class MovieServiceImpl implements MovieService {
 	@Autowired
 	private MovieRepository movieRepository;
 
+	
 	@Autowired
-	private ScheduleRepository scheduleRepository;
+	private RepertoireRepo repertoireRepo;
 
 	@Override
 	public Movie findByTitle(String title) {
@@ -65,10 +68,10 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	public void fetchUpcomingAndCurrentMovies(Model model, String keyword, List<Movie> foundMovies, List<Movie> movies) {
-		List<Schedule> schedules = scheduleRepository.findAll();
+		List<Repertoire> schedules = repertoireRepo.findAll();
 		Set<Movie> currentMovies = new HashSet<Movie>();
 		if (null != schedules) {
-			for (Schedule schedule : schedules) {
+			for (Repertoire schedule : schedules) {
 				if (null != schedule.getMovie() && foundMovies.contains(schedule.getMovie())) {
 					currentMovies.add(schedule.getMovie());
 				}

@@ -34,8 +34,23 @@ public class User {
 	@Column(name = "address", length = 255)
 	private String address;
 	
+	@Column(name = "city", length = 255)
+	private String city;
+	
+	@Column(name = "state", length = 255)
+	private String state;
+	
+	@Column(name = "zipcode", length = 255)
+	private String zipcode;
+	
 	@Column(name = "card", length = 255)
 	private String card;
+	
+	@Column(name = "card_name", length = 255)
+	private String cardName;
+	
+	@Column(name = "CVV", length = 255)
+	private String cvv;
 
 	private Boolean enabled = Boolean.FALSE;
 	
@@ -176,6 +191,50 @@ public class User {
 
 	public void setOldPassword(String oldPassword) {
 		this.oldPassword = oldPassword;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getCardName() {
+		return cardName;
+	}
+
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
+
+	public String getCvv() {
+		return cvv;
+	}
+
+	public void setCvv(String cvv) {
+		this.cvv = cvv;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
 }

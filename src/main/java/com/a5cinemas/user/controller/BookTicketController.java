@@ -4,6 +4,7 @@ package com.a5cinemas.user.controller;
 import static java.lang.Boolean.TRUE;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -154,8 +155,10 @@ public class BookTicketController {
 //            }
             reservation.setRepertoire(repertoire);
             reservation.setUser(userRepo.findByEmail(principal.getName()));
+            reservation.setTicketPrice(0.00+reservedSeats.size()*15);
+            reservation.setCost(8.76+reservedSeats.size()*15);
             reservationRepo.save(reservation);
-            return "redirect:/successful";
+            return "redirect:/order-summary/"+reservation.getId()+"/"+reservation.getCost()+"/"+reservation.getTicketPrice()+"/"+reservation.getRepertoire().getDate()+"/"+reservation.getTicket().getSeat();
         } else {
             return "redirect:/unsuccessful";
         }
@@ -169,5 +172,31 @@ public class BookTicketController {
             }
         }
         return reservedSeats;
+    }
+    
+    @GetMapping("/order-summary/{reservationId}/{cost}/{price}/{date}/{seats}")
+    public String getOrder(Model model, @PathVariable("cost") Double cost, @PathVariable("price") Double price,
+    		@PathVariable("seats") String seats, @PathVariable("date") String date, @PathVariable("reservationId") Long reservationId) {
+    	model.addAttribute("cost", String.format("%.2f", cost));
+    	model.addAttribute("price", String.format("%.2f", price));
+        model.addAttribute("seats",seats);
+        model.addAttribute("date", date);
+        model.addAttribute("reservationId", reservationId);
+        return "order_summary";
+    }
+    
+    @PostMapping("/payment/{reservationId}")
+    public String makePayment(Model model, @ModelAttribute("reservationId") String reservationId) {
+
+    	Reservation reservation = reservationRepo.getById(Long.parseLong(reservationId));
+        model.addAttribute("reservation", reservation);
+        model.addAttribute("rows", rows);
+        return "redirect:/checkout";
+    }
+    
+    @GetMapping("/checkout")
+    public String checkout(Model model) {
+         
+        return "checkout-form";
     }
 }

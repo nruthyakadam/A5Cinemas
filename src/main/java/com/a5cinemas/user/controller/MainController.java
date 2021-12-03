@@ -26,9 +26,11 @@ import com.a5cinemas.user.dto.UserProfileDto;
 import com.a5cinemas.user.exception.CustomerNotFoundException;
 import com.a5cinemas.user.model.CinemaUserDetails;
 import com.a5cinemas.user.model.Movie;
+import com.a5cinemas.user.model.Repertoire;
 import com.a5cinemas.user.model.Schedule;
 import com.a5cinemas.user.model.User;
 import com.a5cinemas.user.repo.MovieRepository;
+import com.a5cinemas.user.repo.RepertoireRepo;
 import com.a5cinemas.user.repo.ScheduleRepository;
 import com.a5cinemas.user.service.MovieService;
 import com.a5cinemas.user.service.UserService;
@@ -40,18 +42,19 @@ public class MainController {
     private UserService userService;
 	
 	@Autowired
-	private ScheduleRepository scheduleRepository;
+    private MovieService movieService;
 	
 	@Autowired
-    private MovieService movieService;
+	private RepertoireRepo repertoireRepo;
+
 	
 	@GetMapping("/")
     public String root(Model model) {
     	
-    	List<Schedule> schedules = scheduleRepository.findAll();
+    	List<Repertoire> schedules = repertoireRepo.findAll();
     	Set<Movie> currentMovies = new HashSet<>();
     	if(null != schedules) {
-    		for(Schedule schedule: schedules) {
+    		for(Repertoire schedule: schedules) {
     			if(null != schedule.getMovie()) {
     				currentMovies.add(schedule.getMovie());
     			}

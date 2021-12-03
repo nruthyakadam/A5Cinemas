@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+     <title>Order Summary</title>
+    <link rel="stylesheet"th:href="@{/css/order_summary.css}">
+    <div id="title">
+        <h1>A5 Cinemas</a></h1>
+    </div>
+    <style>
+    a { text-decoration: none; color: white}
+  	</style>
+    <div id="top-bar">
+<a class="whiteclass" sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage_movies}">Admin Page</a>
+    	<a class="whiteclass" sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
+    	<a sec:authorize="isAuthenticated()" th:href="@{/account}" >[[${#request.userPrincipal.principal.username}]]</a>
+    	<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    </div>
+    
+<!--    <h1 style="font-family: Open Sans, Helvetica, Arial, sans-serif;">A5 Cinemas</h1>
+-->    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="row">
+        <div class="col-75">
+            <div class="outerbox">
+                <form th:action="@{'/payment/' + ${reservationId}}" method="post">
+                    <div class="row">
+                        
+
+                        <div class="col-50">
+                        	<div>
+                            <p style="text-align: center;" th:text="${date}">Saturday, October 2, 2021 | 7:00 pm | 3 Seats</p>
+							<!-- 	<img id="poster" th:src="${movie.poster}"> -->
+                        </div>
+                            <div class="container">
+                                <h4>TICKETS <span class="price" style="color:black"><i class="fa fa-ticket"></i></span></h4>
+                                <p>Tickets price $<span class="price" th:text="${price}"></span></p>
+                                <p th:value="${seats}"><i>Seats A8, A9, A10</i></p>
+                                <hr>
+                                <p>Convenience Fees $<span class="price">5.97</span></p>
+                                <p>Taxes $<span class="price">2.79</span></p>
+                                <hr>
+                                <p>Total $<span class="price" style="color:black"><b th:text="${cost}"></b></span></p>
+                                <input type="submit" value="Continue to checkout" class="btn">
+                                <input type = "hidden" th:value="${reservationId}">
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   <!-- <div class="fixed-footer">
+        <div style="font-family: Open Sans, Helvetica, Arial, sans-serif;" ciclass="container">
+            &nbsp; &nbsp; &nbsp; 1000 Lakeside Dr, Athens, GA 30605
+        </div>
+    </div>-->
+    <footer>
+        <span>1000 Lakeside Dr. Athens, GA</span>
+        <span>706-XXX-XXXX</span>
+    </footer>
+</body>
+</html>
