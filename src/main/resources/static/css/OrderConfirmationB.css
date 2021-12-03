@@ -1,0 +1,128 @@
+﻿body,
+table,
+td,
+a {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+
+img {
+    -ms-interpolation-mode: bicubic;
+    border: 0;
+    height: auto;
+    line-height: 100%;
+    outline: none;
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse !important;
+}
+
+body {
+    height: 100% !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background-image: url('popcorn-1085072_1280.jpg');
+    padding-top: 60px;
+    padding-bottom: 40px;
+    background-image: linear-gradient( rgba(244,67,54,0.1), rgba(244,67,54,0.5) ), url(https://images.unsplash.com/photo-1620177088260-a9150572baf4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1752&q=80);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: right;
+    height: 100vh;
+}
+
+a[x-apple-data-detectors] {
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: inherit !important;
+    font-family: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+}
+
+@media screen and (max-width: 480px) {
+    .mobile-hide {
+        display: none !important;
+    }
+
+    .mobile-center {
+        text-align: center !important;
+    }
+}
+
+div[style*="margin: 16px 0;"] {
+    margin: 0 !important;
+}
+
+
+.container {
+    width: 50%;
+    margin: 0 auto; /* Center the DIV horizontally */
+    background-color: #f2f2f2;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+.fixed-header, .fixed-footer {
+    width: 100%;
+    position: fixed;
+    background: #F44336;
+    padding: 10px 0;
+    color: #fff;
+}
+
+.fixed-header {
+    top: 0;
+}
+
+.fixed-footer {
+    bottom: 0;
+}
+/* Some more styles to beautify this example */
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 7px 25px;
+    display: inline-block;
+}
+
+.container p {
+    line-height: 200px; /* Create scrollbar to test positioning */
+}
+
+h1 {
+    width: 96.8%;
+    background-color: #F44336;
+    top: 0;
+    left: 0;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    font-size: 50px;
+    color: white
+}
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 10px;
+}
+footer {
+    background-color: #F44336;
+    color: white;
+    width: 110%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    text-align: left;
+}
+
+    footer span {
+        margin-right: 30px;
+    }

@@ -46,12 +46,12 @@
 <br><br>
 <h2>Manage Movies:</h2><br>
 <a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/add_new_movie}">Add New Movie</a>
-<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/add_new_movie}">Edit Movie Details</a>
-</div>
+<!-- <a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/add_new_movie}">Edit Movie Details</a>
+ --></div>
 <div class="adminfunc">
 <br>
 <h2>Manage Movie Schedules:</h2><br>
-<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/}">Add Movie Schedule</a>
+<a class="managemovies" sec:authorize="hasAuthority('ADMIN')" th:href="@{/schedule_index}">Add Movie Schedule</a>
 </div>
 <div class="adminfunc">
 <br>

@@ -51,7 +51,12 @@ public class MainController {
 	@GetMapping("/")
     public String root(Model model) {
     	
-    	List<Repertoire> schedules = repertoireRepo.findAll();
+    	extractedModel(model);
+    	return "index";
+    }
+
+	private void extractedModel(Model model) {
+		List<Repertoire> schedules = repertoireRepo.findAll();
     	Set<Movie> currentMovies = new HashSet<>();
     	if(null != schedules) {
     		for(Repertoire schedule: schedules) {
@@ -71,7 +76,12 @@ public class MainController {
     		}
     	}
     	model.addAttribute("upcomingMovies", upcomingMovies);
-    	return "index";
+	}
+	
+	@GetMapping("/schedule_index")
+    public String scheduleIndex(Model model) {
+		extractedModel(model);
+        return "schedule_index";
     }
 
 	@GetMapping("/index")

@@ -24,7 +24,7 @@
         }
     </style>
     <div id="top-bar">
-        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage-promotions}">Manage Promotions</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage_movies}">Admin Page</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
         <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>

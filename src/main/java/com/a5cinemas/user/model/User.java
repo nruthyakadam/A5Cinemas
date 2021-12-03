@@ -51,6 +51,12 @@ public class User {
 	
 	@Column(name = "CVV", length = 255)
 	private String cvv;
+	
+	@Column(name = "month", length = 255)
+	private String month;
+	
+	@Column(name = "year", length = 255)
+	private String year;
 
 	private Boolean enabled = Boolean.FALSE;
 	
@@ -235,6 +241,22 @@ public class User {
 
 	public Boolean getEnabled() {
 		return enabled;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
 	}
 
 }

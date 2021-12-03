@@ -3,6 +3,7 @@ package com.a5cinemas.user.controller;
 
 import static java.lang.Boolean.TRUE;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -32,18 +34,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5cinemas.user.dto.MovieCreationDto;
+import com.a5cinemas.user.dto.PromoCreationDto;
 import com.a5cinemas.user.model.CinemaUserDetails;
 import com.a5cinemas.user.model.Movie;
+import com.a5cinemas.user.model.Promotion;
 import com.a5cinemas.user.model.Repertoire;
 import com.a5cinemas.user.model.Reservation;
 import com.a5cinemas.user.model.Reserve;
 import com.a5cinemas.user.model.SeatReservation;
 import com.a5cinemas.user.model.Ticket;
+import com.a5cinemas.user.model.User;
 import com.a5cinemas.user.repo.MovieRepository;
 import com.a5cinemas.user.repo.RepertoireRepo;
 import com.a5cinemas.user.repo.ReservationRepo;
 import com.a5cinemas.user.repo.TicketRepo;
 import com.a5cinemas.user.repo.UserRepository;
+import com.a5cinemas.user.service.BookingService;
+import com.a5cinemas.user.service.UserService;
 
 @Controller
 public class BookTicketController {
@@ -66,6 +73,17 @@ public class BookTicketController {
     @ModelAttribute("movie")
     public MovieCreationDto movieCreationDto() {
         return new MovieCreationDto();
+    }
+    
+    @Autowired
+    private UserService userService;
+    
+    @Autowired
+    private BookingService bookingService;
+    
+    @ModelAttribute("reservation")
+    public Reservation reservation() {
+        return new Reservation();
     }
     
     @Autowired
@@ -157,8 +175,8 @@ public class BookTicketController {
             reservation.setUser(userRepo.findByEmail(principal.getName()));
             reservation.setTicketPrice(0.00+reservedSeats.size()*15);
             reservation.setCost(8.76+reservedSeats.size()*15);
-            reservationRepo.save(reservation);
-            return "redirect:/order-summary/"+reservation.getId()+"/"+reservation.getCost()+"/"+reservation.getTicketPrice()+"/"+reservation.getRepertoire().getDate()+"/"+reservation.getTicket().getSeat();
+            Reservation reservation2 = reservationRepo.save(reservation);
+            return "redirect:/order-summary/"+reservation.getReservationId()+"/"+reservation.getCost()+"/"+reservation.getTicketPrice()+"/"+reservation.getRepertoire().getDate()+"/"+reservation.getTicket().getSeat();
         } else {
             return "redirect:/unsuccessful";
         }
@@ -177,6 +195,7 @@ public class BookTicketController {
     @GetMapping("/order-summary/{reservationId}/{cost}/{price}/{date}/{seats}")
     public String getOrder(Model model, @PathVariable("cost") Double cost, @PathVariable("price") Double price,
     		@PathVariable("seats") String seats, @PathVariable("date") String date, @PathVariable("reservationId") Long reservationId) {
+    	Reservation reservation1 = reservationRepo.findByReservationId(reservationId);
     	model.addAttribute("cost", String.format("%.2f", cost));
     	model.addAttribute("price", String.format("%.2f", price));
         model.addAttribute("seats",seats);
@@ -188,15 +207,47 @@ public class BookTicketController {
     @PostMapping("/payment/{reservationId}")
     public String makePayment(Model model, @ModelAttribute("reservationId") String reservationId) {
 
-    	Reservation reservation = reservationRepo.getById(Long.parseLong(reservationId));
+    	Reservation reservation = reservationRepo.findByReservationId(Long.parseLong(reservationId));
         model.addAttribute("reservation", reservation);
         model.addAttribute("rows", rows);
-        return "redirect:/checkout";
+        return "redirect:/checkout/"+reservationId;
     }
     
-    @GetMapping("/checkout")
-    public String checkout(Model model) {
-         
+    @GetMapping("/checkout/{reservationId}")
+    public String checkout(Model model, @PathVariable("reservationId") String reservationId, Principal principal) {
+    	Reservation reservation = reservationRepo.findByReservationId(Long.parseLong(reservationId));
+    	CinemaUserDetails user = userService.findByEmail(principal.getName());
+    	model.addAttribute("reservation", reservation);
+    	model.addAttribute("user", user.getUser());
+    	model.addAttribute("cost", String.format("%.2f", reservation.getCost()));
         return "checkout-form";
     }
+    
+    @PostMapping("/payment_confirnation/{reservationId}")
+    public String addNewPromo(Model model, @ModelAttribute("reservationId") String reservationId, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+    	Reservation reservation = reservationRepo.findByReservationId(Long.parseLong(reservationId));
+    	bookingService.sendConfirmation(reservation, getSiteURL(request));
+        return "redirect:/payment-success";
+    }
+    
+    @GetMapping("/payment-success")
+    public String paymentSuccess(Model model) {
+         
+        return "index";
+    }
+    
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
+    }
+    
+//    @PostMapping("/apply-promo/{reservationId}/{promo}")
+//    public String applyPromo(@ModelAttribute("promo") Promotion promo, @ModelAttribute("reservationId") String reservationId) {
+//    	Reservation reservation = reservationRepo.findByReservationId(Long.parseLong(reservationId));
+//    	Double newCost = reservation.getCost() - promo.getDisountPercentage();
+//    	reservation.setCost(newCost);
+//		return "checkout-form";
+//    }
+    
+   // @GetMapping("confirmation")
 }

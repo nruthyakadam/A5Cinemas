@@ -13,13 +13,13 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "id")
-    private Long id;
+    private Long reservationId;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private Movie movie;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "spektacle_id")
     private Spectacle spectacle;
 
@@ -31,7 +31,7 @@ public class Reservation {
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "repertoire_id")
     private Repertoire repertoire;
     
@@ -39,13 +39,6 @@ public class Reservation {
     
     private Double cost;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Movie getMovie() {
 		return movie;
@@ -101,5 +94,13 @@ public class Reservation {
 
 	public void setTicketPrice(Double ticketPrice) {
 		this.ticketPrice = ticketPrice;
+	}
+
+	public Long getReservationId() {
+		return reservationId;
+	}
+
+	public void setReservationId(Long reservationId) {
+		this.reservationId = reservationId;
 	}
 }
