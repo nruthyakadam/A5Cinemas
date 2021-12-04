@@ -39,8 +39,8 @@ body::-webkit-scrollbar-thumb {
     box-shadow: 3px 2px lightgray;
     display: inline-block;
     width: 50%;
-    
-     
+/*     margin-right: 15px;
+ */     
 }
 
 .movie:hover {

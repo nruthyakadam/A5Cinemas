@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Payment Confirmation	</title>
+     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <div id="title">
+        <h1>A5 Cinemas</a></h1>
+    </div>
+    <style>
+        a {
+            text-decoration: none;
+            color: white
+        }
+
+        p {
+            text-decoration: none;
+            color: red
+        }
+
+        .whiteclass {
+            color: white;
+        }
+    </style>
+    <div id="top-bar">
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/manage_movies}">Admin Page</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/	}">Home</a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    </div>
+</head>
+<body id="editing-content">
+<div class="container text-center">
+<br><br><br><br><br><br>
+    <h3 style="color:white;" >Congratulations, your payment has been verified and recieved. Please check your email for details.</h3>
+</div>
+<footer>
+        <span>1000 Lakeside Dr. Athens, GA</span>
+        <span>706-XXX-XXXX</span>
+    </footer>
+</body>
+</html>

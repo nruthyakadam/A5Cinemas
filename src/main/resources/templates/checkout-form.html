@@ -114,7 +114,7 @@
             <div class="container">
                                 <h4>TICKETS <span class="price" style="color:black"><i class="fa fa-ticket"></i></span></h4>
                                 <p>Tickets price $<span class="price" th:text="${reservation.ticketPrice}"></span></p>
-                                <p th:value="${reservation.ticket.seat}"><i></i></p>
+                                <p th:text="${reservation.ticket.seat}"><i></i></p>
                                 <hr>
                                 <p>Convenience Fees $<span class="price">5.97</span></p>
                                 <p>Taxes $<span class="price">2.79</span></p>

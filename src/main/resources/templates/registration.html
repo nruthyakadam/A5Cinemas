@@ -101,15 +101,27 @@
                         <label for="address" class="control-label">Billing Address</label><br> <input id="address" class="form-control" type="text" th:field="*{address}" /><br>
                         <p class="error-message" th:each="error: ${#fields.errors('address')}" th:text="${error}">Validation error</p>
                     </div><br>
+                    <label for="city">City:</label> <br>
+            <input type="text" th:field="*{city}" placeholder="Athens"> <br><br>
+
+            
+
+            <label for="zip-code">Zip code:</label> <br>
+            <input type="text" th:field="*{zipcode}" name="zipcode" placeholder="30606" maxlength="5" pattern="[0-9]+"> <br><br>
+
+            <label for="card">Card number:</label> <br>
+            <input type="password" th:field="*{card}" name="cardnumber" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="16"
+                size="16" pattern="[0-9]+"> <br><br>
+
+            <label for="card-name">Name on card:</label> <br>
+            <input type="text" th:field="*{cardName}" placeholder="John Doe"> <br><br>
                     <div class="form-group" th:classappend="${#fields.hasErrors('card')}? 'has-error':''">
-                        <label for="address" class="control-label">Credit card number</label><br> <input id="card" class="form-control" type="text"  th:field="*{card}"
-                        name="cardnumber" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="16" size="16" pattern="[0-9]+"/><br>
                         <p class="error-message" th:each="error: ${#fields.errors('card')}" th:text="${error}">Validation error</p>
                     </div><br>
                     <div class="form-group" th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
                         <input id="terms" type="checkbox" th:field="*{terms}" required /> <label class="control-label" for="terms">* I agree with the <a
        href="#">terms and conditions</a> for Registration.
-      </label>
+      </label>	
                     </div><br>
                     <div class="form-group" th:classappend="${#fields.hasErrors('recievePromotion')}? 'has-error':''">
                         <input id="terms" type="checkbox" th:field="*{recievePromotion}" /> <label class="control-label" for="terms"> Subscribe to A5 promotional e-mails.

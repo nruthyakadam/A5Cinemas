@@ -233,7 +233,7 @@ public class BookTicketController {
     @GetMapping("/payment-success")
     public String paymentSuccess(Model model) {
          
-        return "index";
+        return "payment_success";
     }
     
     private String getSiteURL(HttpServletRequest request) {

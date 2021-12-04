@@ -1,5 +1,6 @@
 package com.a5cinemas.user.dto;
 
+import javax.persistence.Column;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -33,7 +34,20 @@ public class UserRegistrationDto {
 	
 	private String address;
 	
+	private String city;
+	
+	private String state;
+	
+	private String zipcode;
+	
 	private String card;
+	
+	private String cardName;
+	
+	private String month;
+	
+	private String year;
+
 
 	public String getFirstName() {
 		return firstName;
@@ -105,6 +119,54 @@ public class UserRegistrationDto {
 
 	public void setCard(String card) {
 		this.card = card;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getCardName() {
+		return cardName;
+	}
+
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
 	}
 
 }

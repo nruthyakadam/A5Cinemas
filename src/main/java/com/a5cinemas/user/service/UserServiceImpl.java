@@ -57,8 +57,11 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(registration.getEmail());
 		user.setPassword(passwordEncoder.encode(registration.getPassword()));
 		user.setAddress(registration.getAddress());
+		user.setCity(registration.getCity());
+		user.setZipcode(registration.getZipcode());
 		if(!StringUtils.isEmpty(registration.getCard())){
 		user.setCard(passwordEncoder.encode(registration.getCard()));}
+		user.setCardName(registration.getCardName());
 		user.setRecievePromotion(registration.getRecievePromotion());
 		user.setRoles(Arrays.asList(new Role("USER")));
 		String randomCode = RandomString.make(64);

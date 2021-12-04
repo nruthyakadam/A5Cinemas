@@ -71,7 +71,6 @@
 				<img th:src="${movie.poster}">
 				<h2 th:text="${movie.title}"></h2>
 				<span th:text="${movie.category} + ' | ' + ${movie.rating}"></span><br>
-				<span th:text="'Director: ' + ${movie.director}"></span><br>
 				<input type="hidden" name="title"th:value="${movie.title}">
 				<button type="submit" name="submit" th:value="${movie}" class="link-button">See Movie Details</button>
 			</form>
@@ -89,7 +88,6 @@
             <img th:src="${movie.poster}">
             <h2 th:text="${movie.title}"></h2>
             <span th:text="${movie.category} + ' | ' + ${movie.rating}">Category: Action/Crime/Drama</span>
-            <span th:text="'Director: ' + ${movie.director}">Director: Edgar Wright</span>
 			<input type="hidden" name="title"th:value="${movie.title}">
     		<button type="submit" name="submit" th:value="${movie}" class="link-button">See Movie Details</button>
 			</form> 

@@ -38,19 +38,19 @@
                 </div>
 
                 <h3>Add a new movie</h3>
-      <label for="movietitlename">Title</label>
+      <label for="movietitlename">*Title</label>
       <input required type="text" id="movietitlename" name="title" placeholder="Movie Title" th:field="*{title}" class="form-control">
 
-      <label for="directorname">Director</label>
+      <label for="directorname">*Director</label>
       <input  required type="text" id="directorname" name="director" placeholder="Director" th:field="*{director}" class="form-control">
 
-	  <label for="producer">Producer</label>
+	  <label for="producer">*Producer</label>
       <input  required type="text" id="producer" name="producer" placeholder="Enter in the form HH:MM" th:field="*{producer}" class="form-control">
 
-      <label for="starring">Starring</label>
+      <label for="starring">*Starring</label>
       <input  required type="text" id="starring" name="starring" placeholder="Actors" th:field="*{cast}" class="form-control">
 
-      <label for="rating">Rating</label>
+      <label for="rating">*Rating</label>
       <select  required id="rating" name="rating" th:field="*{rating}" class="form-control">
         <option value="" selected>Movie Rating</option>
         <option value="grating">G</option>
@@ -60,7 +60,7 @@
         <option value="nc17ating">NC-17</option>
       </select>
   
-      <label for="genre">Category</label>
+      <label for="genre">*Category</label>
       <select id="genre" name="genre" th:field="*{genre}" class="form-control">
 		<option value="" selected>Movie Category</option>
         <option th:value="Drama">Drama</option>
@@ -76,23 +76,23 @@
         <option th:value="Family">Family</option>
       </select>
     
-      <label for="runtime">Runtime</label>
+      <label for="runtime">*Runtime in minutes</label>
       <input  required type="text" id="runtime" name="runtime" placeholder="Enter the length in minutes" th:field="*{runtime}" class="form-control">
 
-	  <label for="description">Description</label>
+	  <label for="description">*Description</label>
       <input  required type="text" id="description" name="description" placeholder="Description" th:field="*{description}" class="form-control">
       
-      <label for="description">Review</label>
+      <label for="description">*Review</label>
       <input type="text" id="review" name="review" placeholder="Review" th:field="*{review}" class="form-control">
       
       
-      <label for="language">Language</label>
+      <label for="language">*Language</label>
       <input  required type="text" id="language" name="language" placeholder="Language" th:field="*{language}" class="form-control">
       
-      <label for="poster1">Poster</label>
+      <label for="poster1">*Poster</label>
       <input  required type="text" id="poster1" name="poster1" placeholder="Enter poster's link" th:field="*{poster}" class="form-control">
       
-      <label for="trailer">Trailer</label>
+      <label for="trailer">*Trailer</label>
       <input  required type="text" id="trailer" name="trailer" placeholder="Enter trailer's link" th:field="*{trailer}" class="form-control">
 
       <input  required type="submit" value="Add Movie">
